@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --font-lato: 'Lato', sans-serif;
+  --font-dancing-script: 'Dancing Script', cursive;
+  --color-primary: #282828;
+  --color-gold: #d1af89;
+  --color-gold-light: #e3d5a6;
+  --color-black: #000;
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #000;
+}
