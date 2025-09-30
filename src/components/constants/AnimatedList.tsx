@@ -1,6 +1,17 @@
-import React, { useRef, useState, useEffect, type ReactNode, type MouseEventHandler, type UIEvent } from 'react';
+import React, { useRef, useState, useEffect, useCallback, type ReactNode, type MouseEventHandler, type UIEvent } from 'react';
 import { motion, useInView } from 'framer-motion';
 import './AnimatedList.css';
+
+// Hook per throttling del scroll
+const useThrottledCallback = (callback: (e: UIEvent<HTMLDivElement>) => void, delay: number) => {
+  const lastRun = useRef(Date.now());
+  return useCallback((e: UIEvent<HTMLDivElement>) => {
+    if (Date.now() - lastRun.current >= delay) {
+      callback(e);
+      lastRun.current = Date.now();
+    }
+  }, [callback, delay]);
+};
 
 interface AnimatedItemProps {
   children: ReactNode;
@@ -12,7 +23,7 @@ interface AnimatedItemProps {
 
 const AnimatedItem: React.FC<AnimatedItemProps> = ({ children, delay = 0, index, onMouseEnter, onClick }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.5, once: false });
+  const inView = useInView(ref, { amount: 0.5, once: true });
   return (
     <motion.div
       ref={ref}
@@ -21,8 +32,18 @@ const AnimatedItem: React.FC<AnimatedItemProps> = ({ children, delay = 0, index,
       onClick={onClick}
       initial={{ scale: 0.7, opacity: 0 }}
       animate={inView ? { scale: 1, opacity: 1 } : { scale: 0.7, opacity: 0 }}
-      transition={{ duration: 0.2, delay }}
-      style={{ marginBottom: '1rem', cursor: 'pointer' }}
+      transition={{ 
+        duration: 0.3, 
+        delay,
+        ease: [0.25, 0.46, 0.45, 0.94] // Easing più fluido
+      }}
+      style={{ 
+        marginBottom: '1rem', 
+        cursor: 'pointer',
+        // Ottimizzazioni per mobile
+        transform: 'translateZ(0)',
+        willChange: 'transform, opacity'
+      }}
     >
       {children}
     </motion.div>
@@ -107,13 +128,18 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
   const [topGradientOpacity, setTopGradientOpacity] = useState<number>(0);
   const [bottomGradientOpacity, setBottomGradientOpacity] = useState<number>(1);
 
-  const handleScroll = (e: UIEvent<HTMLDivElement>) => {
+  // Gestore di scroll ottimizzato per mobile
+  const handleScrollInternal = useCallback((e: UIEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const { scrollTop, scrollHeight, clientHeight } = target;
+    
     setTopGradientOpacity(Math.min(scrollTop / 50, 1));
     const bottomDistance = scrollHeight - (scrollTop + clientHeight);
     setBottomGradientOpacity(scrollHeight <= clientHeight ? 0 : Math.min(bottomDistance / 50, 1));
-  };
+  }, []);
+
+  // Throttle del gestore di scroll per migliorare le performance su mobile
+  const handleScroll = useThrottledCallback(handleScrollInternal, 16); // ~60fps
 
   useEffect(() => {
     if (!enableArrowNavigation) return;

@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://alessandro-scafati.vercel.app/sitemap.xml
+
+# Crawl-delay per evitare sovraccarico del server
+Crawl-delay: 1
+
+# Disallow specific directories if any (esempio per future implementazioni)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all main sections
+Allow: /curriculum
+Allow: /book
+Allow: /press
+Allow: /eventi
+Allow: /contatti
