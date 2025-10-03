@@ -28,7 +28,7 @@ export const pressArticles: PressArticle[] = [
       
       <p>I critici hanno elogiato la sua performance nell'ultimo film "La Città Perduta", dove ha interpretato un giovane architetto alle prese con i misteri di una città antica. La sua interpretazione è stata definita "intensa e commovente" dalla stampa specializzata.</p>
     `,
-    image: '/public/ale1.jpg',
+    image: '/ale1.jpg',
     category: 'Cinema',
     readTime: 5
   },
@@ -48,7 +48,7 @@ export const pressArticles: PressArticle[] = [
       
       <p>Tra i suoi progetti futuri c'è un film internazionale che lo vedrà protagonista accanto a star di Hollywood. "È un'opportunità incredibile", confessa. "Sono emozionato e impaurito allo stesso tempo, ma è esattamente quello che cercavo."</p>
     `,
-    image: '/public/ale2.jpg',
+    image: '/ale2.jpg',
     category: 'Intervista',
     readTime: 4
   },
@@ -68,7 +68,7 @@ export const pressArticles: PressArticle[] = [
       
       <p>Con questo premio, Scafati si conferma come una delle promesse del cinema italiano, pronto a conquistare anche il pubblico internazionale.</p>
     `,
-    image: '/public/ale3.jpg',
+    image: '/ale3.jpg',
     category: 'Premi',
     readTime: 3
   },
@@ -88,7 +88,7 @@ export const pressArticles: PressArticle[] = [
       
       <p>Oggi, a distanza di anni, Scafati è riuscito nel suo intento, diventando lui stesso un creatore di quella magia che tanto lo aveva affascinato da bambino.</p>
     `,
-    image: '/public/ale4.jpg',
+    image: '/ale4.jpg',
     category: 'Cinema',
     readTime: 6
   },
@@ -108,7 +108,7 @@ export const pressArticles: PressArticle[] = [
       
       <p>Le sue parole hanno suscitato un acceso dibattito nel mondo del cinema, con molti che si sono dichiarati d'accordo con le sue posizioni, mentre altri hanno espresso perplessità.</p>
     `,
-    image: '/public/ale5.jpg',
+    image: '/ale5.jpg',
     category: 'Opinioni',
     readTime: 4
   },
@@ -130,7 +130,7 @@ export const pressArticles: PressArticle[] = [
       
       <p>Con la sua determinazione e il suo talento, Alessandro Scafati è destinato a diventare uno dei protagonisti del cinema italiano degli anni a venire.</p>
     `,
-    image: '/public/ale6.jpg',
+    image: '/ale6.jpg',
     category: 'Profilo',
     readTime: 5
   }
