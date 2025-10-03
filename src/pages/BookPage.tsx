@@ -55,19 +55,19 @@ const BookPage = () => {
     ];
 
     return (
-      <div className="min-h-fit bg-black p-4 md:p-20 pt-25 md:pt-30">
+      <div className="min-h-screen bg-black p-4 md:p-20 pt-25 md:pt-30">
         <Heading title="Book" />
         <Divider className="mb-4" />
         <Masonry
-            items={items}
-            ease="power3.out"
-            duration={0.6}
-            stagger={0.05}
-            animateFrom="bottom"
-            scaleOnHover={true}
-            hoverScale={0.95}
-            blurToFocus={true}
-            colorShiftOnHover={false}
+          items={items}
+          ease="power3.out"
+          duration={0.6}
+          stagger={0.05}
+          animateFrom="bottom"
+          scaleOnHover={true}
+          hoverScale={0.95}
+          blurToFocus={true}
+          colorShiftOnHover={false}
         />
       </div>
     );

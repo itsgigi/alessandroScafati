@@ -18,3 +18,29 @@ body {
 html {
   background-color: #000;
 }
+
+/* Custom styles for press cards */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Custom styles for article content */
+.prose {
+  color: rgb(255 255 255 / 0.9);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: rgb(255 255 255 / 0.95);
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}

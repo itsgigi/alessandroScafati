@@ -103,13 +103,13 @@ const Calendar = ({ onDateSelect, selectedDate, events = [] }: CalendarProps) =>
     const days = getDaysInMonth(currentMonth);
 
     return (
-        <div className="bg-gray-900 min-h-[500px] rounded-lg p-6 border border-gray-700">
-            <div className="flex items-center justify-between mb-6">
+        <div className="bg-primary min-h-[500px] rounded-lg p-6 border border-gold/30">
+            <div className="flex items-center justify-between mb-6 font-lato">
                 <h2 className="text-xl font-semibold text-white">Calendario Eventi</h2>
                 <div className="flex gap-2">
                     <button
                         onClick={handleTodayClick}
-                        className="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
+                        className="px-3 py-1 text-sm bg-blue-800 hover:bg-blue-700 text-white rounded transition-colors"
                     >
                         Oggi
                     </button>
@@ -122,7 +122,7 @@ const Calendar = ({ onDateSelect, selectedDate, events = [] }: CalendarProps) =>
                 </div>
             </div>
 
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4 font-lato">
                 <button
                     onClick={handlePrevMonth}
                     className="p-2 text-gray-400 hover:text-white transition-colors"
@@ -154,7 +154,7 @@ const Calendar = ({ onDateSelect, selectedDate, events = [] }: CalendarProps) =>
                 ))}
             </div>
 
-            <div className="grid grid-cols-7 gap-1">
+            <div className="grid grid-cols-7 gap-1 font-lato">
                 {days.map((day, index) => {
                     if (!day) {
                         return <div key={index} className="p-2"></div>;
@@ -171,7 +171,7 @@ const Calendar = ({ onDateSelect, selectedDate, events = [] }: CalendarProps) =>
                             onClick={() => handleDateClick(day)}
                             className={`relative p-2 text-sm rounded transition-all hover:bg-gray-700 ${
                                 isSelected
-                                    ? 'bg-blue-600 text-white'
+                                    ? 'bg-gold-light border border-red-500/40 text-black'
                                     : isTodayDate
                                     ? 'bg-blue-500/20 text-blue-300 font-semibold'
                                     : 'text-gray-300 hover:text-white'
@@ -181,7 +181,7 @@ const Calendar = ({ onDateSelect, selectedDate, events = [] }: CalendarProps) =>
                             {dayHasEvents && (
                                 <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full flex items-center justify-center text-xs ${
                                     isSelected 
-                                        ? 'bg-white text-blue-600' 
+                                        ? 'bg-red-500 text-blue-600' 
                                         : 'bg-red-500 text-white'
                                 }`}>
                                     {eventCount > 1 ? eventCount : ''}

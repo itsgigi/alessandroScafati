@@ -21,7 +21,7 @@ const Heading = ({ title, className }: Headingrops) => {
       variants={HeadingVariants}
       initial="initial"
       animate="animate"
-      className={twMerge('text-3xl font-bold mb-4 font-dancing-script text-[#d1af89]', className)}
+      className={twMerge('text-4xl font-bold mb-4 font-dancing-script text-[#d1af89]', className)}
     >
         {title}
     </motion.h1>

@@ -1,8 +1,9 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import PhotoModal from './PhotoModal';
 
 const useMedia = (queries: string[], values: number[], defaultValue: number): number => {
-  const get = () => values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue;
+  const get = useCallback(() => values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue, [queries, values, defaultValue]);
 
   const [value, setValue] = useState<number>(get);
 
@@ -10,7 +11,7 @@ const useMedia = (queries: string[], values: number[], defaultValue: number): nu
     const handler = () => setValue(get);
     queries.forEach(q => matchMedia(q).addEventListener('change', handler));
     return () => queries.forEach(q => matchMedia(q).removeEventListener('change', handler));
-  }, [queries]);
+  }, [queries, get]);
 
   return value;
 };
@@ -90,8 +91,10 @@ const Masonry: React.FC<MasonryProps> = ({
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
-  const getInitialPosition = (item: GridItem) => {
+  const getInitialPosition = useCallback((item: GridItem) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
     if (!containerRect) return { x: item.x, y: item.y };
 
@@ -118,20 +121,20 @@ const Masonry: React.FC<MasonryProps> = ({
       default:
         return { x: item.x, y: item.y + 100 };
     }
-  };
+  }, [animateFrom, containerRef]);
 
   useEffect(() => {
     preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
-  const grid = useMemo<GridItem[]>(() => {
-    if (!width) return [];
+  const { grid, containerHeight } = useMemo(() => {
+    if (!width) return { grid: [], containerHeight: 0 };
     const colHeights = new Array(columns).fill(0);
     const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
 
-    return items.map(child => {
+    const gridItems = items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
       const height = child.height / 2;
@@ -140,6 +143,11 @@ const Masonry: React.FC<MasonryProps> = ({
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };
     });
+
+    // Calcola l'altezza del container basata sulla colonna più alta
+    const maxHeight = Math.max(...colHeights);
+
+    return { grid: gridItems, containerHeight: maxHeight };
   }, [columns, items, width]);
 
   const hasMounted = useRef(false);
@@ -183,7 +191,7 @@ const Masonry: React.FC<MasonryProps> = ({
     });
 
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, getInitialPosition]);
 
   const handleMouseEnter = (id: string, element: HTMLElement) => {
     if (scaleOnHover) {
@@ -213,15 +221,32 @@ const Masonry: React.FC<MasonryProps> = ({
     }
   };
 
+  const handlePhotoClick = (index: number) => {
+    setCurrentPhotoIndex(index);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleNavigate = (index: number) => {
+    setCurrentPhotoIndex(index);
+  };
+
   return (
-    <div ref={containerRef} className="relative w-full h-full">
-      {grid.map(item => (
+    <div 
+      ref={containerRef} 
+      className="relative w-full" 
+      style={{ height: containerHeight }}
+    >
+      {grid.map((item, index) => (
         <div
           key={item.id}
           data-key={item.id}
-          className="absolute box-content"
+          className="absolute box-content cursor-pointer"
           style={{ willChange: 'transform, width, height, opacity' }}
-          onClick={() => window.open(item.url, '_blank', 'noopener')}
+          onClick={() => handlePhotoClick(index)}
           onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
           onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
         >
@@ -235,6 +260,14 @@ const Masonry: React.FC<MasonryProps> = ({
           </div>
         </div>
       ))}
+      
+      <PhotoModal
+        isOpen={modalOpen}
+        onClose={handleCloseModal}
+        photos={items}
+        currentIndex={currentPhotoIndex}
+        onNavigate={handleNavigate}
+      />
     </div>
   );
 };
