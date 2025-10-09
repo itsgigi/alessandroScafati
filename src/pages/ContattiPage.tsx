@@ -3,9 +3,9 @@ import Heading from '../components/constants/ui/Heading';
 import Divider from '../components/constants/ui/Divider';
 
 const ContattiPage = () => {
-  const email = "alessandro.scafati@example.com";
-  const phone = "+39 123 456 7890";
-  const agency = "Agenzia Teatranti tra tanti";
+  const email = "alexscafati93@gmail.com";
+  const phone = "+39 327 925 4991";
+  const agency = "Agenzia Teatranti Tra Tanti";
 
   const handleEmailClick = () => {
     window.location.href = `mailto:${email}`;
@@ -13,6 +13,10 @@ const ContattiPage = () => {
 
   const handlePhoneClick = () => {
     window.location.href = `tel:${phone}`;
+  };
+
+  const handleAgencyClick = () => {
+    window.location.href = `https://www.teatrantitratanti.it/`;
   };
 
   return (
@@ -51,7 +55,7 @@ const ContattiPage = () => {
           {/* Agenzia */}
           <div 
             className="flex flex-col items-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer group"
-            onClick={handlePhoneClick}
+            onClick={handleAgencyClick}
           >
             <div className="w-24 h-24 bg-gold-light/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-500/30 transition-colors duration-300">
               <Clapperboard className="w-12 h-12 text-gold" />

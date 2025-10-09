@@ -18,8 +18,13 @@ const Header = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <nav className="relative flex items-center justify-between h-16 bg-primary/50 border border-gold/30 rounded-lg lg:shadow-lg lg:px-8 mt-4">
                 <div className="flex-shrink-0">
-                    <a href="#" title="" className="flex" onClick={handleLogoClick}>
-                        <img className="w-auto h-12 lg:h-12" src="/firma.png" alt="" />
+                    <a href="#" title="" className="flex relative" onClick={handleLogoClick}>
+                        <div className="absolute inset-0 p-3 rounded-full -z-10" style={{
+                            background: 'radial-gradient(circle, rgba(194, 132, 64, 0.8) 50%, rgba(194, 132, 64, 0.6) 50%, rgba(194, 132, 64, 0.4) 80%, rgba(194, 132, 64, 0.1) 100%)',
+                            filter: 'blur(7px)',
+                            transform: 'scale(1)'
+                        }}></div>
+                        <img className="relative w-auto h-12 lg:h-12 color-gold z-10" src="/firmaAle.svg" alt="" />
                     </a>
                 </div>
 

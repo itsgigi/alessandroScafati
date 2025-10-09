@@ -1,13 +1,29 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { pressArticles } from '../data/pressData';
 import Heading from '../components/constants/ui/Heading';
 import Block from '../components/constants/Block';
+import GlobalApi from '../utils/GlobalApit';
+import { useEffect, useState } from 'react';
+import type { Article } from '../utils/types';
 
 const PressDetailsPage = () => {
   const { articleId } = useParams<{ articleId: string }>();
   const navigate = useNavigate();
+  const [article, setArticle] = useState<Article | null>(null);
+  
+  useEffect(() => {
+    if (articleId) {
+      console.log(articleId);
+      GlobalApi.getArticleById(articleId).then((data) => {
+        console.log(data.articles[0]);
+          setArticle(data.articles[0]);
+      });
+    }
+  }, [articleId]);
 
-  const article = pressArticles.find(art => art.id === articleId);
+  function calculateReadTime(content: string) {
+    const words = content.split(' ').length;
+    return Math.ceil(words / 200);
+  }
 
   if (!article) {
     return (
@@ -35,7 +51,7 @@ const PressDetailsPage = () => {
               {article.category}
             </span>
             <span className="text-sm opacity-60">
-              {article.readTime} min di lettura
+              {calculateReadTime(article.content)} min di lettura
             </span>
           </div>
           
@@ -44,11 +60,11 @@ const PressDetailsPage = () => {
           </h1>
           
           <div className="flex items-center justify-center gap-4 text-sm opacity-80">
-            <span>di {article.author}</span>
+            <span>Di {article.author}</span>
             <span>•</span>
-            <span>{article.publication}</span>
+            <span>{article.publisher}</span>
             <span>•</span>
-            <span>{new Date(article.date).toLocaleDateString('it-IT')}</span>
+            <span>{new Date(article.createdAt).toLocaleDateString('it-IT')}</span>
           </div>
         </header>
 
@@ -56,7 +72,7 @@ const PressDetailsPage = () => {
         <div className="mb-12">
           <div className="aspect-square rounded-lg overflow-hidden">
             <img
-              src={article.image}
+              src={article.image.url}
               alt={article.title}
               className="w-full h-full object-cover object-top"
             />
@@ -66,7 +82,7 @@ const PressDetailsPage = () => {
         <Block>
             <div className="mb-12">
                 <p className="text-xl opacity-90 leading-relaxed pl-6">
-                    {article.excerpt}
+                    {article.subtitle}
                 </p>
             </div>
 
@@ -80,13 +96,13 @@ const PressDetailsPage = () => {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                     <img
-                        src={article.image}
+                        src={article.image.url}
                         alt={article.title}
                         className="w-12 h-12 rounded-full object-cover"
                     />
                     <div>
                         <p className="font-medium">{article.author}</p>
-                        <p className="text-sm opacity-60">{article.publication}</p>
+                        <p className="text-sm opacity-60">{article.publisher}</p>
                     </div>
                     </div>
                     
