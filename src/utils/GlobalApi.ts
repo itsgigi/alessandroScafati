@@ -4,7 +4,8 @@ import type {
     Article,
     Bio, 
     Media, 
-    YoutubeVideo
+    YoutubeVideo,
+    Event
 } from './types'
 
 const MASTER_URL = import.meta.env.VITE_HYGRAPH_API_URL
@@ -91,6 +92,7 @@ const getArticleById = async (id: string): Promise<{ articles: Article[] }> => {
                 publisher
                 subtitle
                 createdAt
+                articleUrl
             }
         }
     `
@@ -113,6 +115,76 @@ const getHomeImages = async (): Promise<{ homeImages: { images: Media[] }[] }> =
     return result as any
 }
 
+const getEvents = async (): Promise<{ events: Event[] }> => {
+    const query = gql`
+        query getEvents {
+            events(first: 100) {
+                id
+                bookingUrl
+                description
+                image {
+                    url
+                }
+                isTIcketAvailable
+                location
+                title
+                type
+                dates
+            }
+        }
+    `
+    const result = await request(MASTER_URL, query) as {
+        events: Array<{
+            id: string
+            bookingUrl: string
+            description: string
+            image: { url: string }
+            isTIcketAvailable: boolean
+            location: string
+            title: string
+            type: string
+            dates: string[]
+        }>
+    }
+
+    const mapped: Event[] = result.events.map((e) => ({
+        id: e.id,
+        bookingUrl: e.bookingUrl,
+        description: e.description,
+        image: { url: e.image?.url ?? '' },
+        isTIcketAvailable: e.isTIcketAvailable,
+        location: e.location,
+        title: e.title,
+        type: e.type,
+        dates: Array.isArray(e.dates) ? e.dates.map((d) => d) : []
+    }))
+
+    return { events: mapped }
+}
+
+const getEventById = async (id: string): Promise<{ events: Event[] }> => {
+    const query = gql`
+        query getEventById {
+            events(where: {id: "`+id+`"}) {
+                id
+                bookingUrl
+                description
+                image {
+                    url
+                }
+                isTIcketAvailable
+                location
+                title
+                type
+                dates
+            }
+        }
+    `
+
+    const result = await request(MASTER_URL, query)
+    return result as any
+}
+
 export default {
     getBio,
     getYoutubeVideos,
@@ -120,4 +192,6 @@ export default {
     getArticles,
     getArticleById,
     getHomeImages,
+    getEvents,
+    getEventById
 }

@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import Heading from '../components/constants/ui/Heading';
 import Block from '../components/constants/Block';
-import GlobalApi from '../utils/GlobalApit';
+import GlobalApi from '../utils/GlobalApi';
 import { useEffect, useState } from 'react';
 import type { Article } from '../utils/types';
 
@@ -23,6 +23,18 @@ const PressDetailsPage = () => {
   function calculateReadTime(content: string) {
     const words = content.split(' ').length;
     return Math.ceil(words / 200);
+  }
+
+  function toExternalHref(url: string): string {
+    const trimmed = url.trim();
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('//')) {
+      return trimmed;
+    }
+    const withoutLeadingSlashes = trimmed.replace(/^\/+/, '');
+    if (withoutLeadingSlashes.startsWith('www.') || /\.[a-z]{2,}(\/|$)/i.test(withoutLeadingSlashes)) {
+      return `https://${withoutLeadingSlashes}`;
+    }
+    return withoutLeadingSlashes;
   }
 
   if (!article) {
@@ -55,11 +67,11 @@ const PressDetailsPage = () => {
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
             {article.title}
           </h1>
           
-          <div className="flex items-center justify-center gap-4 text-sm opacity-80">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-sm md:text-lg opacity-80 text-nowrap">
             <span>Di {article.author}</span>
             <span>•</span>
             <span>{article.publisher}</span>
@@ -88,11 +100,22 @@ const PressDetailsPage = () => {
 
             {/* Article Content */}
             <article className="prose prose-invert prose-lg max-w-none font-lato font-light">
-                <div dangerouslySetInnerHTML={{ __html: article.content }} />
+                <div dangerouslySetInnerHTML={{ __html: article.content }} className="mb-4"/>
+
+                {article.articleUrl && (
+                  <a
+                    className="text-sm font-semibold italic underline text-gold"
+                    href={toExternalHref(article.articleUrl)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Leggi l'articolo completo su {article.publisher}
+                  </a>
+                )}
             </article>
 
             {/* Article Footer */}
-            <footer className="mt-16 pt-8 border-t border-white/20">
+            <footer className="mt-4 pt-4 border-t border-white/20">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                     <img

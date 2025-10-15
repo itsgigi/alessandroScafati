@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Heading from '../components/constants/ui/Heading';
 import Divider from '../components/constants/ui/Divider';
 import { useState, useEffect } from 'react';
-import GlobalApi from '../utils/GlobalApit';
+import GlobalApi from '../utils/GlobalApi';
 import type { Article } from '../utils/types';
 
 const PressPage = () => {
@@ -14,6 +14,8 @@ const PressPage = () => {
       setArticles(data.articles);
     });
   }, []);
+
+  console.log('articles: ', articles);
 
   const handleArticleClick = (articleId: string) => {
     navigate(`/press/${articleId}`);
@@ -49,7 +51,7 @@ const PressPage = () => {
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">
-                    {article.category.toUpperCase()}
+                    {article.category.map((category) => category.toUpperCase()).join(' - ')}
                   </span>
                   <span className="text-xs opacity-60">
                     {calculateReadTime(article.content)} min

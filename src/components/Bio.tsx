@@ -1,6 +1,6 @@
 import Block from './constants/Block'
 import Heading from './constants/ui/Heading'
-import GlobalApi from '../utils/GlobalApit'
+import GlobalApi from '../utils/GlobalApi'
 import { useState, useEffect } from 'react'
 
 const Bio = () => {

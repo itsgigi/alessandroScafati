@@ -6,10 +6,12 @@ export interface Event {
   id: string;
   title: string;
   description: string;
-  images: { url: string }[];
-  date: Date;
+  image: { url: string };
+  dates: string[];
   type: string;
   bookingUrl: string;
+  isTIcketAvailable: boolean;
+  location: string;
 }
 
 export interface YoutubeVideo {
@@ -27,10 +29,11 @@ export interface Article {
     id: string;
     author: string;
     title: string;
-    category: 'cinema' | 'teatro' | 'televisione' | 'evento';
+    category: ('cinema' | 'teatro' | 'televisione' | 'evento')[];
     content: string;
     image: { url: string };
     publisher: string;
     subtitle: string;
     createdAt: Date;
+    articleUrl: string;
 }

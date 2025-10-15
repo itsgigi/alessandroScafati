@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BlurText from "../../components/constants/ui/BlurText";
 import type { Media } from "../../utils/types";
-import GlobalApi from "../../utils/GlobalApit";
+import GlobalApi from "../../utils/GlobalApi";
 
 const HeroSection = () => {
   const screenWidth = window.innerWidth;
@@ -26,7 +26,7 @@ const HeroSection = () => {
   }, [images.length]);
 
   useEffect(() => {
-    setBlurSize(screenWidth > 1024 ? 'scale(0.2)' : 'scale(0.6)');
+    setBlurSize(screenWidth > 1024 ? 'scale(0.3)' : 'scale(0.6)');
     setBlurStrength(screenWidth > 720 ? 'blur(120px)' : 'blur(60px)');
   }, [screenWidth]);
   
@@ -62,7 +62,7 @@ const HeroSection = () => {
               delay={150}
               animateBy="words"
               direction="top"
-              className="text-lg md:text-2xl font-lato font-light opacity-90 drop-shadow-md z-1000"
+              className="text-lg md:text-2xl font-lato  font-extralight opacity-90 drop-shadow-md z-1000"
             />
           </div>
         </div>

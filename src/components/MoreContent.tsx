@@ -2,7 +2,7 @@ import Block from './constants/Block'
 import Heading from './constants/ui/Heading'
 import ScrollStack, { ScrollStackItem } from './constants/ScrollStack'
 import { useState, useEffect } from 'react'
-import GlobalApi from '../utils/GlobalApit'
+import GlobalApi from '../utils/GlobalApi'
 import type { YoutubeVideo } from '../utils/types'
 
 const MoreContent = () => {

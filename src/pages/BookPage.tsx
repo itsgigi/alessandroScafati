@@ -2,7 +2,7 @@ import Divider from "../components/constants/ui/Divider";
 import Heading from "../components/constants/ui/Heading";
 import Masonry from "../components/Masonry";
 import { useState, useEffect } from "react";
-import GlobalApi from "../utils/GlobalApit";
+import GlobalApi from "../utils/GlobalApi";
 import { type Media } from "../utils/types";
 
 const BookPage = () => {
