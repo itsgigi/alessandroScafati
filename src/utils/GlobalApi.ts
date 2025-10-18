@@ -5,7 +5,9 @@ import type {
     Bio, 
     Media, 
     YoutubeVideo,
-    Event
+    Event,
+    Curriculum,
+    Experience
 } from './types'
 
 const MASTER_URL = import.meta.env.VITE_HYGRAPH_API_URL
@@ -185,6 +187,57 @@ const getEventById = async (id: string): Promise<{ events: Event[] }> => {
     return result as any
 }
 
+const getCurriculum = async (): Promise<{ curricula: Curriculum[] }> => {
+    const query = gql`
+        query getCurriculum {
+            curricula {
+                experience
+                prizes {
+                    html
+                }
+                studies {
+                    html
+                }
+            }
+        }
+    `
+
+    const result = await request(MASTER_URL, query)
+    return result as any
+}
+
+const getExperiences = async (): Promise<{ experiences: Experience[] }> => {
+    const query = gql`
+        query getExperiences {
+            experiences(first: 100) {
+                cinema {
+                    description
+                    role
+                    year
+                }
+                teather {
+                    description
+                    role
+                    year
+                }
+                television {
+                    description
+                    role
+                    year
+                }
+                advertise {
+                    description
+                    role
+                    year
+                }
+            }
+        }
+    `
+
+    const result = await request(MASTER_URL, query)
+    return result as any
+}
+
 export default {
     getBio,
     getYoutubeVideos,
@@ -193,5 +246,7 @@ export default {
     getArticleById,
     getHomeImages,
     getEvents,
-    getEventById
+    getEventById,
+    getCurriculum,
+    getExperiences
 }

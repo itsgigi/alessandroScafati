@@ -1,28 +1,42 @@
-import Timeline, { type TimelineEntry } from "./Timeline";
+import { useEffect, useState } from "react";
+import GlobalApi from "../../utils/GlobalApi";
+import type { Experience } from "../../utils/types";
+import Timeline from "./Timeline";
 
-type MultiTimelineProps = {
-  teatro: TimelineEntry[];
-  cinema: TimelineEntry[];
-  tv: TimelineEntry[];
-  pubblicita: TimelineEntry[];
-};
+const MultiTimeline = () => {
+  const [experiences, setExperiences] = useState<Experience | null>(null);
 
-const MultiTimeline = ({ teatro, cinema, tv, pubblicita }: MultiTimelineProps) => {
+  useEffect(() => {
+    GlobalApi.getExperiences().then((data) => {
+      setExperiences(data.experiences[0]);
+    });
+  }, []);
+
+  if (!experiences) {
+    return (
+      <section className="max-w-6xl mx-auto px-6">
+        <div className="text-center py-20">
+          <p className="text-gold">Caricamento esperienze...</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="max-w-6xl mx-auto px-6">
       <div className="relative">
-        <div className="md:pt-20 pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="md:pt-20 pt-10 grid grid-cols-1 sm:grid-cols-2 gap-8">
           <div>
-            <Timeline title="Teatro" entries={teatro} />
+            <Timeline title="Teatro" entries={experiences.teather} />
           </div>
           <div>
-            <Timeline title="Cinema" entries={cinema} />
+            <Timeline title="Cinema" entries={experiences.cinema} />
           </div>
           <div>
-            <Timeline title="TV" entries={tv} />
+            <Timeline title="Televisione" entries={experiences.television} />
           </div>
           <div>
-            <Timeline title="Pubblicità" entries={pubblicita} />
+            <Timeline title="Pubblicità" entries={experiences.advertise} />
           </div>
         </div>
       </div>

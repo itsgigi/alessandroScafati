@@ -9,13 +9,16 @@ const PressDetailsPage = () => {
   const { articleId } = useParams<{ articleId: string }>();
   const navigate = useNavigate();
   const [article, setArticle] = useState<Article | null>(null);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
+    setLoading(true);
     if (articleId) {
       console.log(articleId);
       GlobalApi.getArticleById(articleId).then((data) => {
         console.log(data.articles[0]);
           setArticle(data.articles[0]);
+          setLoading(false);
       });
     }
   }, [articleId]);
@@ -37,17 +40,20 @@ const PressDetailsPage = () => {
     return withoutLeadingSlashes;
   }
 
-  if (!article) {
+  if (loading) {
+    return (
+      <div className="min-h-screen text-gold font-lato flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gold">Caricamento articolo...</p>
+        </div>
+      </div>
+    );
+  } else if (!article) {
+    
     return (
       <div className="min-h-screen text-gold font-lato flex items-center justify-center">
         <div className="text-center">
           <Heading title="Articolo non trovato" />
-          <button
-            onClick={() => navigate('/press')}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors duration-300"
-          >
-            Torna alla Press
-          </button>
         </div>
       </div>
     );

@@ -1,23 +1,22 @@
-import { useState } from 'react';
-
-interface Event {
-    id: string;
-    image: string;
-    title: string;
-    description: string;
-    date: string;
-    fullDate?: Date;
-}
+import { useState, useEffect } from 'react';
+import GlobalApi from '../utils/GlobalApi';
+import type { Event } from '../utils/types';
 
 interface CalendarProps {
     onDateSelect: (date: Date | null) => void;
     selectedDate?: Date | null;
-    events?: Event[];
 }
 
-const Calendar = ({ onDateSelect, selectedDate, events = [] }: CalendarProps) => {
+const Calendar = ({ onDateSelect, selectedDate }: CalendarProps) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [localSelectedDate, setLocalSelectedDate] = useState<Date | null>(selectedDate || null);
+    const [events, setEvents] = useState<Event[]>([]);
+
+    useEffect(() => {
+        GlobalApi.getEvents().then((data) => {
+            setEvents(data.events);
+        });
+    }, []);
 
     const months = [
         'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
@@ -89,14 +88,14 @@ const Calendar = ({ onDateSelect, selectedDate, events = [] }: CalendarProps) =>
     // Funzione per verificare se una data ha eventi
     const hasEvents = (date: Date) => {
         return events.some(event => 
-            event.fullDate && isSameDate(event.fullDate, date)
+            event.dates && event.dates.some(eventDate => isSameDate(new Date(eventDate), date))
         );
     };
 
     // Funzione per contare gli eventi in una data
     const getEventCount = (date: Date) => {
         return events.filter(event => 
-            event.fullDate && isSameDate(event.fullDate, date)
+            event.dates && event.dates.some(eventDate => isSameDate(new Date(eventDate), date))
         ).length;
     };
 

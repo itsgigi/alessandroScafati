@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Calendar from '../components/Calendar';
 import EventList from '../components/EventList';
-import { allEvents } from '../components/constants/eventsData';
 
 const EventsPage = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -19,7 +18,6 @@ const EventsPage = () => {
                             <Calendar 
                                 onDateSelect={handleDateSelect}
                                 selectedDate={selectedDate}
-                                events={allEvents}
                             />
                         </div>
                         <div className="lg:col-span-2">

@@ -29,7 +29,7 @@ const Header = () => {
                 </div>
 
                 <button type="button" className="inline-flex p-2 ml-5 text-gold transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100" onClick={handleMenuClick}>
-                    <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className={`w-6 h-6 transition-transform duration-300`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
@@ -49,16 +49,30 @@ const Header = () => {
                 </div>
             </nav>
 
-            <nav className={`flex flex-col py-4 space-y-2 lg:hidden bg-primary border border-gold/30 lg:rounded-md lg:shadow-lg lg:px-8 lg:py-0 font-lato ${isOpen ? 'block' : 'hidden'}`}>    
-                <a href="/curriculum" title="" className="py-2 text-base font-medium text-gold transition-all duration-200 focus:text-gold-light"> Curriculum </a>
+            <nav className={`flex flex-col py-4 space-y-2 lg:hidden bg-primary border border-gold/30 lg:rounded-md lg:shadow-lg lg:px-8 lg:py-0 font-lato transition-all duration-300 ease-in-out transform origin-top overflow-hidden ${
+                isOpen 
+                    ? 'opacity-100 translate-y-0 max-h-96' 
+                    : 'opacity-0 -translate-y-2 max-h-0'
+            }`}>    
+                <a href="/curriculum" title="" className={`py-2 text-base font-medium border-b-1 w-[80%] items-center justify-center mx-auto border-gold/30 text-gold transition-all duration-200 focus:text-gold-light transform ${
+                    isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                }`} style={{ transitionDelay: isOpen ? '100ms' : '0ms' }}> Curriculum </a>
 
-                <a href="/book" title="" className="py-2 text-base font-medium text-gold transition-all duration-200 focus:text-gold-light"> Book </a>
+                <a href="/book" title="" className={`py-2 text-base font-medium border-b-1 w-[80%] items-center justify-center mx-auto border-gold/30 text-gold transition-all duration-200 focus:text-gold-light transform ${
+                    isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                }`} style={{ transitionDelay: isOpen ? '150ms' : '0ms' }}> Book </a>
 
-                <a href="/press" title="" className="py-2 text-base font-medium text-gold transition-all duration-200 focus:text-gold-light"> Press </a>
+                <a href="/press" title="" className={`py-2 text-base font-medium border-b-1 w-[80%] items-center justify-center mx-auto border-gold/30 text-gold transition-all duration-200 focus:text-gold-light transform ${
+                    isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                }`} style={{ transitionDelay: isOpen ? '200ms' : '0ms' }}> Press </a>
 
-                <a href="/contatti" title="" className="py-2 text-base font-medium text-gold transition-all duration-200 focus:text-gold-light"> Contatti </a>
+                <a href="/contatti" title="" className={`py-2 text-base font-medium border-b-1 w-[80%] items-center justify-center mx-auto border-gold/30 text-gold transition-all duration-200 focus:text-gold-light transform ${
+                    isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                }`} style={{ transitionDelay: isOpen ? '250ms' : '0ms' }}> Contatti </a>
 
-                <a href="/eventi" title="" className="py-2 text-base font-medium text-gold transition-all duration-200 focus:text-gold-light"> Eventi </a>
+                <a href="/eventi" title="" className={`py-2 text-base font-medium text-gold transition-all duration-200 focus:text-gold-light transform ${
+                    isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                }`} style={{ transitionDelay: isOpen ? '300ms' : '0ms' }}> Eventi </a>
             </nav>
         </div>
     </header>

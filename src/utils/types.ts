@@ -37,3 +37,22 @@ export interface Article {
     createdAt: Date;
     articleUrl: string;
 }
+
+export interface Curriculum {
+    experience: string;
+    prizes: { html: string };
+    studies: { html: string };
+}
+
+export interface Experience {
+    cinema: ExperienceEntry[];
+    teather: ExperienceEntry[];
+    television: ExperienceEntry[];
+    advertise: ExperienceEntry[];
+}
+
+export interface ExperienceEntry {
+    description: string;
+    role: string;
+    year: number;
+}

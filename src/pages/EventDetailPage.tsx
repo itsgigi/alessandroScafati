@@ -29,25 +29,19 @@ const EventDetailPage = () => {
             </div>
         );
     }
-
-
-    console.log('event: ', event.isTIcketAvailable);
     
     return (
         <div className="min-h-screen bg-black">
-            {/* Hero Section */}
-            <div className="relative h-[50vh] md:h-[85vh] w-full overflow-hidden">
-                <img 
-                    src={event.image.url} 
-                    alt={event.title}
-                    className="w-full h-full object-cover object-top"
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-            </div>
-            
             {/* Event Information Section */}
-            <div className="max-w-4xl mx-auto px-6 pb-12 font-lato">
+            <div className="max-w-4xl mx-auto px-6 py-12 pt-30 font-lato">
+                {/* Event Image */}
+                <div className="mb-8 flex justify-center">
+                    <img 
+                        src={event.image.url} 
+                        alt={event.title}
+                        className="max-w-full h-auto rounded-lg shadow-lg"
+                    />
+                </div>
                 <div className="space-y-8">
                     {/* Title */}
                     <Heading title={event.title} />
@@ -62,7 +56,19 @@ const EventDetailPage = () => {
                         <div className="flex gap-12">
                             {event.dates && <div>
                                 <h3 className="text-lg font-semibold text-gold-light mb-2">Data</h3>
-                                <p className="text-gold">{event.dates.map(date => new Date(date).toLocaleDateString('it-IT', { day: 'numeric', month: 'numeric', year: 'numeric' })).join(', ')}</p>
+                                <div className="text-gold">
+                                    {event.dates.map((date, index) => (
+                                        <div key={index}>
+                                            {new Date(date).toLocaleString('it-IT', { 
+                                                day: 'numeric', 
+                                                month: 'numeric', 
+                                                year: 'numeric',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            })}
+                                        </div>
+                                    ))}
+                                </div>
                             </div>}
                             <div>
                                 <h3 className="text-lg font-semibold text-gold-light mb-2">Tipo Evento</h3>
