@@ -15,8 +15,9 @@ export interface Event {
 }
 
 export interface YoutubeVideo {
-    youtubeUrl: string;
+    title: string;
     videoUrl: string;
+    displayOrder: number;
 }
 
 export interface Media {
@@ -55,4 +56,9 @@ export interface ExperienceEntry {
     description: string;
     role: string;
     year: number;
+}
+
+export interface Showreel {
+    title: string;
+    url: string;
 }

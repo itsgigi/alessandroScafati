@@ -10,7 +10,7 @@ const MoreContent = () => {
 
   useEffect(() => {
     GlobalApi.getYoutubeVideos().then((data) => {
-      setYoutubeVideos(data.videos);
+      setYoutubeVideos(data.videos.sort((a, b) => a.displayOrder - b.displayOrder));
     });
   }, []);
 

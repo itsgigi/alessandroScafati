@@ -72,7 +72,11 @@ const EventDetailPage = () => {
                             </div>}
                             <div>
                                 <h3 className="text-lg font-semibold text-gold-light mb-2">Tipo Evento</h3>
-                                <p className="text-gold">Spettacolo Teatrale</p>
+                                <p className="text-gold">{event.type}</p>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gold-light mb-2">Location</h3>
+                                <p className="text-gold">{event.location}</p>
                             </div>
                         </div>
 

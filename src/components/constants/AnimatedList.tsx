@@ -42,7 +42,7 @@ const AnimatedItem: React.FC<AnimatedItemProps> = ({ children, delay = 0, index,
         cursor: 'pointer',
         // Ottimizzazioni per mobile
         transform: 'translateZ(0)',
-        willChange: 'transform, opacity'
+        willChange: 'transform, opacity',
       }}
     >
       {children}
@@ -168,7 +168,9 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
                     backgroundImage: `url(${item.image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'top',
-                    position: 'relative'
+                    position: 'relative',
+                    maxHeight: '150px',
+                    overflow: 'hidden',
                   }}
                 >
                   <div className="item-overlay"></div>
