@@ -17,10 +17,10 @@ const EventList = ({ selectedDate }: EventListProps) => {
     useEffect(() => {
         GlobalApi.getEvents().then(
             (data) => {
-                setAllEvents(data.events);
+                console.log(data.events.flatMap(event => event.eventEntry));
+                setAllEvents(data.events.flatMap(event => event.eventEntry));
             }
         );
-        
     }, []);
 
     // Funzione per confrontare le date (solo giorno, mese, anno)

@@ -14,7 +14,7 @@ const EventDetailPage = () => {
     useEffect(() => {
         if (eventId) {
             GlobalApi.getEventById(eventId).then((data) => {
-                setEvent(data.events[0]);
+                setEvent(data.events[0].eventEntry[0]);
             });
         }
     }, [eventId]);
@@ -81,7 +81,7 @@ const EventDetailPage = () => {
                         </div>
 
                         <Button icon="clock" className="mt-6" onClick={() => window.open(event.bookingUrl, '_blank')}>
-                            { event.isTIcketAvailable ? 'Prenota' : 'Scopri di più' }
+                            { event.isTicketAvailable ? 'Prenota' : 'Scopri di più' }
                         </Button>
                     </div>
                 </div>

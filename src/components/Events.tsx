@@ -13,7 +13,7 @@ const Events = () => {
     useEffect(() => {
         GlobalApi.getEvents().then(
             (data) => {
-                setEvents(data.events);
+                setEvents(data.events.flatMap(event => event.eventEntry));
             }
         );
     }, []);

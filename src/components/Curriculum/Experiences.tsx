@@ -2,22 +2,26 @@ import GlobalApi from "../../utils/GlobalApi";
 import Button from "../constants/ui/Button";
 import Heading from "../constants/ui/Heading";
 import { useState } from "react";
-import type { Curriculum } from "../../utils/types";
+import type { Curriculum, CurriculumPdf } from "../../utils/types";
 import { useEffect } from "react";
 
 const Experiences = () => {
     const [curriculum, setCurriculum] = useState<Curriculum | null>(null);
+    const [curriculumPdf, setCurriculumPdf] = useState<CurriculumPdf | null>(null);
 
     useEffect(() => {
         GlobalApi.getCurriculum().then((data) => {
             setCurriculum(data.curricula[0]);
         });
+        GlobalApi.getCurriculumPdf().then((data) => {
+            setCurriculumPdf(data.curriculumPdfs[0].cvFile);
+        });
     }, []);
 
     const handleDownloadCV = () => {
         const link = document.createElement('a');
-        link.href = '/CV-ALESSANDRO-SCAFATI.pdf';
-        link.download = 'CV-ALESSANDRO-SCAFATI.pdf';
+        link.href = curriculumPdf?.url ?? '';
+        link.download = curriculumPdf?.fileName ?? '';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

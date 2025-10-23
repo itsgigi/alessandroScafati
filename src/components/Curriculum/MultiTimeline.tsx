@@ -38,6 +38,12 @@ const MultiTimeline = () => {
           <div>
             <Timeline title="Pubblicità" entries={experiences.advertise} />
           </div>
+          <div>
+            <Timeline title="Videoclip" entries={experiences.videoclip} />
+          </div>
+          <div>
+            <Timeline title="Web" entries={experiences.web} />
+          </div>
         </div>
       </div>
     </section>

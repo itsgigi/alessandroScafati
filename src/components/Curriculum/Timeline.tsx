@@ -26,7 +26,22 @@ const Timeline = ({ title, entries }: TimelineProps) => {
             .sort((a, b) => Number(b) - Number(a))
             .map((year) => (
             <div key={year} className="mb-6">
-              <div className="text-lg font-semibold mb-2 ml-4">{year}</div>
+              <div className="text-lg font-semibold mb-2 ml-4">
+                {(() => {
+                  const entries = grouped[Number(year)] || [];
+                  const hasEndYear = entries.some(entry => entry.endYear);
+                  if (hasEndYear) {
+                    const endYears = entries.map(entry => entry.endYear).filter(Boolean);
+                    const uniqueEndYears = [...new Set(endYears)];
+                    if (uniqueEndYears.length === 1) {
+                      return `${year} - ${uniqueEndYears[0]}`;
+                    } else {
+                      return `${year} - ${Math.max(...endYears)}`;
+                    }
+                  }
+                  return year;
+                })()}
+              </div>
               <ul className="space-y-2">
                 {grouped[Number(year)]?.map((item, idx) => (
                   <li key={`${year}-${idx}`} className="flex items-start gap-3">

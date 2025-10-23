@@ -8,7 +8,9 @@ import type {
     Event,
     Curriculum,
     Experience,
-    Showreel
+    Showreel,
+    EventDto,
+    CurriculumPdfDto
 } from './types'
 
 const MASTER_URL = import.meta.env.VITE_HYGRAPH_API_URL
@@ -31,6 +33,8 @@ const getYoutubeVideos = async (): Promise<{ videos: YoutubeVideo[] }> => {
         query GetYoutubeVideos {
             videos {
                 videoUrl
+                displayOrder
+                title
             }
         }
     `
@@ -118,21 +122,23 @@ const getHomeImages = async (): Promise<{ homeImages: { images: Media[] }[] }> =
     return result as any
 }
 
-const getEvents = async (): Promise<{ events: Event[] }> => {
+const getEvents = async (): Promise<{ events: EventDto[] }> => {
     const query = gql`
         query getEvents {
-            events(first: 100) {
-                id
-                bookingUrl
-                description
-                image {
-                    url
+            events {
+                eventEntry(first: 100)  {
+                    id
+                    bookingUrl
+                    description
+                    image {
+                        url
+                    }
+                    isTicketAvailable
+                    location
+                    title
+                    type
+                    dates
                 }
-                isTIcketAvailable
-                location
-                title
-                type
-                dates
             }
         }
     `
@@ -142,7 +148,7 @@ const getEvents = async (): Promise<{ events: Event[] }> => {
             bookingUrl: string
             description: string
             image: { url: string }
-            isTIcketAvailable: boolean
+            isTicketAvailable: boolean
             location: string
             title: string
             type: string
@@ -150,36 +156,41 @@ const getEvents = async (): Promise<{ events: Event[] }> => {
         }>
     }
 
-    const mapped: Event[] = result.events.map((e) => ({
+    const mapped: EventDto[] = result.events.map((e: any): EventDto => ({
         id: e.id,
-        bookingUrl: e.bookingUrl,
-        description: e.description,
-        image: { url: e.image?.url ?? '' },
-        isTIcketAvailable: e.isTIcketAvailable,
-        location: e.location,
-        title: e.title,
-        type: e.type,
-        dates: Array.isArray(e.dates) ? e.dates.map((d) => d) : []
+        eventEntry: e.eventEntry.map((event: any): Event => ({
+            id: event.id,
+            bookingUrl: event.bookingUrl,
+            description: event.description,
+            image: { url: event.image?.url ?? '' },
+            isTicketAvailable: event.isTicketAvailable,
+            location: event.location,
+            title: event.title,
+            type: event.type,
+            dates: Array.isArray(event.dates) ? event.dates.map((d: any): string => d) : []
+        }))
     }))
 
     return { events: mapped }
 }
 
-const getEventById = async (id: string): Promise<{ events: Event[] }> => {
+const getEventById = async (id: string): Promise<{ events: EventDto[] }> => {
     const query = gql`
         query getEventById {
-            events(where: {id: "`+id+`"}) {
-                id
-                bookingUrl
-                description
-                image {
-                    url
+            events {
+                eventEntry(where: {id: "`+id+`"}) {
+                    id
+                    bookingUrl
+                    description
+                    image {
+                        url
+                    }
+                    isTicketAvailable
+                    location
+                    title
+                    type
+                    dates
                 }
-                isTIcketAvailable
-                location
-                title
-                type
-                dates
             }
         }
     `
@@ -215,21 +226,37 @@ const getExperiences = async (): Promise<{ experiences: Experience[] }> => {
                     description
                     role
                     year
+                    endYear
                 }
                 teather {
                     description
                     role
                     year
+                    endYear
                 }
                 television {
                     description
                     role
                     year
+                    endYear
                 }
                 advertise {
                     description
                     role
                     year
+                    endYear
+                }
+                videoclip {
+                    description
+                    role
+                    year
+                    endYear
+                }
+                web {
+                    description
+                    role
+                    year
+                    endYear
                 }
             }
         }
@@ -253,6 +280,24 @@ const getShowreel = async (): Promise<{ showreels: Showreel[] }> => {
     return result as any
 }
 
+const getCurriculumPdf = async (): Promise<{ curriculumPdfs: CurriculumPdfDto[] }> => {
+    const query = gql`
+        query getCurriculumPdf {
+            curriculumPdfs {
+                cvFile {
+                    url
+                    fileName
+                    mimeType
+                    size
+                }
+            }
+        }
+    `
+
+    const result = await request(MASTER_URL, query)
+    return result as any
+}
+
 export default {
     getBio,
     getYoutubeVideos,
@@ -264,5 +309,6 @@ export default {
     getEventById,
     getCurriculum,
     getExperiences,
-    getShowreel
+    getShowreel,
+    getCurriculumPdf
 }

@@ -2,6 +2,11 @@ export interface Bio {
   content: string;
 }
 
+export interface EventDto {
+    id: string;
+    eventEntry: Event[];
+}
+
 export interface Event {
   id: string;
   title: string;
@@ -10,7 +15,7 @@ export interface Event {
   dates: string[];
   type: string;
   bookingUrl: string;
-  isTIcketAvailable: boolean;
+  isTicketAvailable: boolean;
   location: string;
 }
 
@@ -50,15 +55,29 @@ export interface Experience {
     teather: ExperienceEntry[];
     television: ExperienceEntry[];
     advertise: ExperienceEntry[];
+    videoclip: ExperienceEntry[];
+    web: ExperienceEntry[];
 }
 
 export interface ExperienceEntry {
     description: string;
     role: string;
     year: number;
+    endYear: number;
 }
 
 export interface Showreel {
     title: string;
     url: string;
+}
+
+export interface CurriculumPdfDto {
+    cvFile: CurriculumPdf;
+}
+
+export interface CurriculumPdf {
+    url: string;
+    fileName: string;
+    mimeType: string;
+    size: number;
 }
