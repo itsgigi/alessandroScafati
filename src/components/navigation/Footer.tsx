@@ -71,6 +71,11 @@ const Footer = () => {
             Luigi Di Loreto
             </a>
         </p>
+        <p className='text-xs mt-2'>
+            <a href="/privacy" className='text-gold hover:text-gold-light hover:underline'>
+              Privacy Policy
+            </a>
+        </p>
       </div>
     </div>
   )

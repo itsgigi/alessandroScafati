@@ -7,6 +7,7 @@ import BookPage from './pages/BookPage';
 import PressPage from './pages/PressPage';
 import PressDetailsPage from './pages/PressDetailsPage';
 import ContattiPage from './pages/ContattiPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import './App.css';
 import Header from './components/navigation/Header';
 import Footer from './components/navigation/Footer';
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/press" element={<PressPage />} />
         <Route path="/press/:articleId" element={<PressDetailsPage />} />
         <Route path="/contatti" element={<ContattiPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
       </Routes>
       <Footer />
     </Router>
