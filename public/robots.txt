@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://alessandro-scafati.vercel.app/sitemap.xml
+Sitemap: https://alessandroscafati.it
 
 # Crawl-delay per evitare sovraccarico del server
 Crawl-delay: 1
