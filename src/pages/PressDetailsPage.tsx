@@ -78,13 +78,15 @@ const PressDetailsPage = () => {
             {article.title}
           </h1>
           
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm md:text-lg opacity-80 text-nowrap">
-            <span>Di {article.author}</span>
-            <span>•</span>
-            <span>{article.publisher}</span>
-            <span>•</span>
-            <span>{new Date(article.createdAt).toLocaleDateString('it-IT')}</span>
-          </div>
+          { article.author && 
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm md:text-lg opacity-80 text-nowrap">
+              <span>Di {article.author}</span>
+              <span>•</span>
+              <span>{article.publisher}</span>
+              <span>•</span>
+              <span>{new Date(article.createdAt).toLocaleDateString('it-IT')}</span>
+            </div>
+          }
         </header>
 
         {/* Article Image */}
@@ -98,56 +100,57 @@ const PressDetailsPage = () => {
           </div>
         </div>
 
-        <Block>
-            <div className="mb-12">
-                <p className="text-xl opacity-90 leading-relaxed pl-6">
-                    {article.subtitle}
-                </p>
-            </div>
+        { article.content && 
+          <Block>
+              <div className="mb-12">
+                  <p className="text-xl opacity-90 leading-relaxed pl-6">
+                      {article.subtitle}
+                  </p>
+              </div>
 
-            {/* Article Content */}
-            <article className="prose prose-invert prose-lg max-w-none font-lato font-light">
-                <div dangerouslySetInnerHTML={{ __html: article.content }} className="mb-4"/>
+              {/* Article Content */}
+              <article className="prose prose-invert prose-lg max-w-none font-lato font-light">
+                  <div dangerouslySetInnerHTML={{ __html: article.content }} className="mb-4"/>
 
-                {article.articleUrl && (
-                  <a
-                    className="text-sm font-semibold italic underline text-gold"
-                    href={toExternalHref(article.articleUrl)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Leggi l'articolo completo su {article.publisher}
-                  </a>
-                )}
-            </article>
-
-            {/* Article Footer */}
-            <footer className="mt-4 pt-4 border-t border-white/20">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                    <img
-                        src={article.image.url}
-                        alt={article.title}
-                        className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                        <p className="font-medium">{article.author}</p>
-                        <p className="text-sm opacity-60">{article.publisher}</p>
-                    </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-4">
-                    <button
-                        onClick={() => navigate('/press')}
-                        className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors duration-300"
+                  {article.articleUrl && (
+                    <a
+                      className="text-sm font-semibold italic underline text-gold"
+                      href={toExternalHref(article.articleUrl)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                        Altri Articoli
-                    </button>
-                    </div>
-                </div>
-            </footer>
-        </Block>
-        {/* Article Excerpt */}
+                      Leggi l'articolo completo su {article.publisher}
+                    </a>
+                  )}
+              </article>
+
+              {/* Article Footer */}
+              <footer className="mt-4 pt-4 border-t border-white/20">
+                  <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                      <img
+                          src={article.image.url}
+                          alt={article.title}
+                          className="w-12 h-12 rounded-full object-cover"
+                      />
+                      <div>
+                          <p className="font-medium">{article.author}</p>
+                          <p className="text-sm opacity-60">{article.publisher}</p>
+                      </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-4">
+                      <button
+                          onClick={() => navigate('/press')}
+                          className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors duration-300"
+                      >
+                          Altri Articoli
+                      </button>
+                      </div>
+                  </div>
+              </footer>
+          </Block>
+        }
       </div>
     </div>
   );
