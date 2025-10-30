@@ -24,6 +24,7 @@ const PressDetailsPage = () => {
   }, [articleId]);
 
   function calculateReadTime(content: string) {
+    if (!content) return 0;
     const words = content.split(' ').length;
     return Math.ceil(words / 200);
   }
