@@ -33,7 +33,7 @@ const PressPage = () => {
         <Divider className="mb-4" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.map((article) => (
+          {articles.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((article) => (
             <div
               key={article.id}
               onClick={() => handleArticleClick(article.id)}
