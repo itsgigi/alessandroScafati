@@ -7,44 +7,54 @@ type TimelineProps = {
 };
 
 const Timeline = ({ title, entries }: TimelineProps) => {
-  const grouped = Array.isArray(entries) ? entries.reduce<Record<number, ExperienceEntry[]>>((acc, e) => {
-    if (!acc[e.year]) acc[e.year] = [];
-    acc[e.year].push(e);
-    return acc;
-  }, {}) : {};
+  const grouped = Array.isArray(entries)
+    ? entries.reduce<Map<string, { label: string; startYear: number; endYear: number | null; items: ExperienceEntry[] }>>((acc, entry) => {
+        const startYear = Number(entry.year);
+        const rawEndYear = entry.endYear ? Number(entry.endYear) : null;
+        const endYear = Number.isNaN(rawEndYear) ? null : rawEndYear;
+        const key = `${startYear}-${endYear ?? ""}`;
+
+        if (!acc.has(key)) {
+          const label = endYear && endYear !== startYear ? `${startYear} - ${endYear}` : `${startYear}`;
+          acc.set(key, {
+            label,
+            startYear,
+            endYear,
+            items: [],
+          });
+        }
+
+        acc.get(key)?.items.push(entry);
+        return acc;
+      }, new Map())
+    : new Map();
+
+  const sortedGroups = Array.from(grouped.values()).sort((a, b) => {
+    if (a.startYear === b.startYear) {
+      const endA = a.endYear ?? a.startYear;
+      const endB = b.endYear ?? b.startYear;
+      return endB - endA;
+    }
+    return b.startYear - a.startYear;
+  });
 
   return (
     <div className="w-full text-center">
       <Heading title={title} />
       <div className="relative border-l border-white/30">
-        {Object.keys(grouped).length === 0 ? (
+        {sortedGroups.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-gold/70">Nessuna esperienza disponibile</p>
           </div>
         ) : (
-          Object.keys(grouped)
-            .sort((a, b) => Number(b) - Number(a))
-            .map((year) => (
-            <div key={year} className="mb-6">
+          sortedGroups.map((group) => (
+            <div key={`${group.startYear}-${group.endYear ?? ""}`} className="mb-6">
               <div className="text-lg font-semibold mb-2 ml-4">
-                {(() => {
-                  const entries = grouped[Number(year)] || [];
-                  const hasEndYear = entries.some(entry => entry.endYear);
-                  if (hasEndYear) {
-                    const endYears = entries.map(entry => entry.endYear).filter(Boolean);
-                    const uniqueEndYears = [...new Set(endYears)];
-                    if (uniqueEndYears.length === 1) {
-                      return `${year} - ${uniqueEndYears[0]}`;
-                    } else {
-                      return `${year} - ${Math.max(...endYears)}`;
-                    }
-                  }
-                  return year;
-                })()}
+                {group.label}
               </div>
               <ul className="space-y-2">
-                {grouped[Number(year)]?.map((item, idx) => (
-                  <li key={`${year}-${idx}`} className="flex items-start gap-3">
+                {group.items.map((item, idx) => (
+                  <li key={`${group.startYear}-${group.endYear ?? ""}-${idx}`} className="flex items-start gap-3">
                     <span className="w-2 h-2 mt-2 rounded-full bg-white"></span>
                     <div className="w-full text-center">
                       <div className="font-medium">{item.description}</div>

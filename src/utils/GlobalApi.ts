@@ -47,7 +47,7 @@ const getMedia = async (): Promise<{ books: { images: Media[] }[] }> => {
     const query = gql`
         query getMedia {
             books {
-                images {
+                images(first: 100) {
                     id
                     size
                     height
