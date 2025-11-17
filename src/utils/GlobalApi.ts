@@ -222,37 +222,37 @@ const getExperiences = async (): Promise<{ experiences: Experience[] }> => {
     const query = gql`
         query getExperiences {
             experiences(first: 100) {
-                cinema {
+                cinema(first: 100) {
                     description
                     role
                     year
                     endYear
                 }
-                teather {
+                teather(first: 100) {
                     description
                     role
                     year
                     endYear
                 }
-                television {
+                television(first: 100) {
                     description
                     role
                     year
                     endYear
                 }
-                advertise {
+                advertise(first: 100) {
                     description
                     role
                     year
                     endYear
                 }
-                videoclip {
+                videoclip(first: 100) {
                     description
                     role
                     year
                     endYear
                 }
-                web {
+                web(first: 100) {
                     description
                     role
                     year
