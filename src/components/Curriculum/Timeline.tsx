@@ -53,7 +53,7 @@ const Timeline = ({ title, entries }: TimelineProps) => {
                 {group.label}
               </div>
               <ul className="space-y-2">
-                {group.items.map((item, idx) => (
+                {group.items.map((item: ExperienceEntry, idx: number) => (
                   <li key={`${group.startYear}-${group.endYear ?? ""}-${idx}`} className="flex items-start gap-3">
                     <span className="w-2 h-2 mt-2 rounded-full bg-white"></span>
                     <div className="w-full text-center">
