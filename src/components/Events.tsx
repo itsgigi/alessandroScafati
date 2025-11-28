@@ -26,7 +26,7 @@ const Events = () => {
             <AnimatedList
                 items={events.map(event => ({
                     id: event.id,
-                    image: event.image.url,
+                    image: event.image[0]?.url ?? '',
                     title: event.title,
                     description: event.description,
                     date: event.dates[0] ? new Date(event.dates[0]).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : ''

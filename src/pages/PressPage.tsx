@@ -41,7 +41,7 @@ const PressPage = () => {
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <img
-                  src={article.image.url}
+                  src={article.image[0]?.url ?? ''}
                   alt={article.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />

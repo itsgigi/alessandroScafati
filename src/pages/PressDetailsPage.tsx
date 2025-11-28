@@ -10,6 +10,7 @@ const PressDetailsPage = () => {
   const navigate = useNavigate();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   useEffect(() => {
     setLoading(true);
@@ -18,6 +19,7 @@ const PressDetailsPage = () => {
       GlobalApi.getArticleById(articleId).then((data) => {
         console.log(data.articles[0]);
           setArticle(data.articles[0]);
+          setCurrentImageIndex(0); // Reset indice quando cambia articolo
           setLoading(false);
       });
     }
@@ -89,16 +91,73 @@ const PressDetailsPage = () => {
           }
         </header>
 
-        {/* Article Image */}
-        <div className="mb-12">
-          <div className="aspect-square rounded-lg overflow-hidden">
-            <img
-              src={article.image.url}
-              alt={article.title}
-              className="w-full h-full object-cover object-top"
-            />
+        {/* Article Image Carousel */}
+        {article.image && article.image.length > 0 && (
+          <div className="mb-12 relative">
+            <div className="relative flex justify-center items-center">
+              {/* Immagine corrente */}
+              <div className="relative w-full aspect-square rounded-lg overflow-hidden">
+                <img
+                  src={article.image[currentImageIndex].url}
+                  alt={`${article.title} - Immagine ${currentImageIndex + 1}`}
+                  className="w-full h-full object-cover object-top transition-opacity duration-300"
+                />
+                
+                {/* Frecce di navigazione */}
+                {article.image.length > 1 && (
+                  <>
+                    {/* Freccia sinistra */}
+                    <button
+                      onClick={() => setCurrentImageIndex((prev) => 
+                        prev === 0 ? article.image.length - 1 : prev - 1
+                      )}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white text-xl font-bold transition-all duration-200 z-10"
+                      aria-label="Immagine precedente"
+                    >
+                      ‹
+                    </button>
+                    
+                    {/* Freccia destra */}
+                    <button
+                      onClick={() => setCurrentImageIndex((prev) => 
+                        (prev + 1) % article.image.length
+                      )}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white text-xl font-bold transition-all duration-200 z-10"
+                      aria-label="Immagine successiva"
+                    >
+                      ›
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+            
+            {/* Indicatori (dots) */}
+            {article.image.length > 1 && (
+              <div className="flex justify-center gap-2 mt-4">
+                {article.image.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                      index === currentImageIndex 
+                        ? 'bg-gold w-8' 
+                        : 'bg-gold/40 hover:bg-gold/60'
+                    }`}
+                    aria-label={`Vai all'immagine ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+            
+            {/* Contatore immagini */}
+            {article.image.length > 1 && (
+              <div className="text-center mt-2 text-gold/70 text-sm">
+                {currentImageIndex + 1} / {article.image.length}
+              </div>
+            )}
           </div>
-        </div>
+        )}
 
         { article.content && 
           <Block>
@@ -129,7 +188,7 @@ const PressDetailsPage = () => {
                   <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                       <img
-                          src={article.image.url}
+                          src={article.image[0]?.url || article.image[currentImageIndex]?.url}
                           alt={article.title}
                           className="w-12 h-12 rounded-full object-cover"
                       />

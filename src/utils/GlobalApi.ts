@@ -162,7 +162,11 @@ const getEvents = async (): Promise<{ events: EventDto[] }> => {
             id: event.id,
             bookingUrl: event.bookingUrl,
             description: event.description,
-            image: { url: event.image?.url ?? '' },
+            image: event.image.map((image: any): Media => ({
+                id: image.id,
+                url: image.url,
+                height: image.height
+            })),
             isTicketAvailable: event.isTicketAvailable,
             location: event.location,
             title: event.title,

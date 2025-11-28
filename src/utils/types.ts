@@ -11,7 +11,7 @@ export interface Event {
   id: string;
   title: string;
   description: string;
-  image: { url: string };
+  image: { url: string }[];
   dates: string[];
   type: string;
   bookingUrl: string;
@@ -37,7 +37,7 @@ export interface Article {
     title: string;
     category: ('cinema' | 'teatro' | 'televisione' | 'evento')[];
     content: string;
-    image: { url: string };
+    image: { url: string }[];
     publisher: string;
     subtitle: string;
     createdAt: Date;
