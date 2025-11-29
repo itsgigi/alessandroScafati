@@ -11,12 +11,15 @@ const Events = () => {
     const [events, setEvents] = useState<Event[]>([]);
     
     useEffect(() => {
-        GlobalApi.getEvents().then(
-            (data) => {
-                setEvents(data.events.flatMap(event => event.eventEntry));
-            }
-        );
+        GlobalApi.getEvents().then((data) => {
+            setEvents(data.events.flatMap(event => event.eventEntry));
+        });
     }, []);
+
+    const sortedEvents = events?.sort((a, b) => {
+        if (!a.dates || !b.dates) return 0;
+        return new Date(a.dates[0]).getTime() - new Date(b.dates[0]).getTime();
+    });
 
     const navigate = useNavigate();
 
@@ -24,7 +27,7 @@ const Events = () => {
         <Block className='md:col-span-4 col-span-8'>
             <Heading title='Prossimi Eventi' />
             <AnimatedList
-                items={events.map(event => ({
+                items={sortedEvents.map(event => ({
                     id: event.id,
                     image: event.image[0]?.url ?? '',
                     title: event.title,

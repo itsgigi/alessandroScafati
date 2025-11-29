@@ -43,8 +43,6 @@ const EventDetailPage = () => {
             </div>
         );
     }
-
-    console.log('event.image', event.image);
     
     return (
         <div className="min-h-screen bg-black">

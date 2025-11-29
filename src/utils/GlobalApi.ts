@@ -5,7 +5,6 @@ import type {
     Bio, 
     Media, 
     YoutubeVideo,
-    Event,
     Curriculum,
     Experience,
     Showreel,
@@ -142,40 +141,8 @@ const getEvents = async (): Promise<{ events: EventDto[] }> => {
             }
         }
     `
-    const result = await request(MASTER_URL, query) as {
-        events: Array<{
-            id: string
-            bookingUrl: string
-            description: string
-            image: { url: string }
-            isTicketAvailable: boolean
-            location: string
-            title: string
-            type: string
-            dates: string[]
-        }>
-    }
-
-    const mapped: EventDto[] = result.events.map((e: any): EventDto => ({
-        id: e.id,
-        eventEntry: e.eventEntry.map((event: any): Event => ({
-            id: event.id,
-            bookingUrl: event.bookingUrl,
-            description: event.description,
-            image: event.image.map((image: any): Media => ({
-                id: image.id,
-                url: image.url,
-                height: image.height
-            })),
-            isTicketAvailable: event.isTicketAvailable,
-            location: event.location,
-            title: event.title,
-            type: event.type,
-            dates: Array.isArray(event.dates) ? event.dates.map((d: any): string => d) : []
-        }))
-    }))
-
-    return { events: mapped }
+    const result = await request(MASTER_URL, query) as any
+    return result
 }
 
 const getEventById = async (id: string): Promise<{ events: EventDto[] }> => {

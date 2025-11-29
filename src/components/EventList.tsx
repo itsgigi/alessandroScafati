@@ -18,7 +18,6 @@ const EventList = ({ selectedDate }: EventListProps) => {
     useEffect(() => {
         GlobalApi.getEvents().then(
             (data) => {
-                console.log(data.events.flatMap(event => event.eventEntry));
                 setAllEvents(data.events.flatMap(event => event.eventEntry));
             }
         ).finally(() => setLoading(false));
