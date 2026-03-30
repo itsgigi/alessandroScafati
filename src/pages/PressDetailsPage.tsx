@@ -67,14 +67,15 @@ const PressDetailsPage = () => {
       <div className="max-w-4xl mx-auto px-6 py-30 xl:px-0">
         {/* Article Header */}
         <header className="mb-12">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="px-4 py-2 bg-white/20 rounded-full text-sm font-medium">
-              {article.category}
-            </span>
-            <span className="text-sm opacity-60">
-              {calculateReadTime(article.content)} min di lettura
-            </span>
-          </div>
+          { calculateReadTime(article.content) > 0 && <div className="flex items-center gap-3 mb-6">
+              <span className="px-4 py-2 bg-white/20 rounded-full text-sm font-medium">
+                {article.category}
+              </span>
+              <span className="text-sm opacity-60">
+                {calculateReadTime(article.content)} min di lettura
+              </span>
+            </div>
+          }
           
           <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
             {article.title}
@@ -96,11 +97,11 @@ const PressDetailsPage = () => {
           <div className="mb-12 relative">
             <div className="relative flex justify-center items-center">
               {/* Immagine corrente */}
-              <div className="relative w-full aspect-square rounded-lg overflow-hidden">
+              <div className="relative w-full rounded-lg overflow-hidden">
                 <img
                   src={article.image[currentImageIndex].url}
                   alt={`${article.title} - Immagine ${currentImageIndex + 1}`}
-                  className="w-full h-full object-cover object-top transition-opacity duration-300"
+                  className="w-full h-full object-fill object-top transition-opacity duration-300"
                 />
                 
                 {/* Frecce di navigazione */}
