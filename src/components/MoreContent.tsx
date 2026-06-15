@@ -1,5 +1,6 @@
 import Block from './constants/Block'
 import Heading from './constants/ui/Heading'
+import LiteYoutube from './constants/ui/LiteYoutube'
 import ScrollStack, { ScrollStackItem } from './constants/ScrollStack'
 import { useState, useEffect } from 'react'
 import GlobalApi from '../utils/GlobalApi'
@@ -20,7 +21,7 @@ const MoreContent = () => {
         <ScrollStack className='p-4 mt-10 pb-12'>
             {youtubeVideos.map((video) => (
                 <ScrollStackItem key={video.videoUrl} itemClassName='!p-0 overflow-hidden'>
-                    <iframe className='rounded-xl' width="100%" height="100%" src={video.videoUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    <LiteYoutube url={video.videoUrl} title={video.title} className="rounded-xl h-full" />
                 </ScrollStackItem>
             ))}
         </ScrollStack>

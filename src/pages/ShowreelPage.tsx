@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Heading from '../components/constants/ui/Heading';
 import Divider from '../components/constants/ui/Divider';
+import LiteYoutube from '../components/constants/ui/LiteYoutube';
 import SEO from '../components/SEO';
 import GlobalApi from '../utils/GlobalApi';
 import type { Showreel, YoutubeVideo } from '../utils/types';
@@ -31,15 +32,7 @@ const ShowreelPage = () => {
 
         {showreel?.url && (
           <div className="mb-12">
-            <iframe
-              className="w-full rounded-xl shadow-lg shadow-[#d1af89]/20"
-              height="450"
-              src={showreel.url}
-              title={showreel.title || 'Showreel'}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
+            <LiteYoutube url={showreel.url} title={showreel.title || 'Showreel'} className="rounded-xl shadow-lg shadow-[#d1af89]/20 h-[450px]" />
           </div>
         )}
 
@@ -49,14 +42,7 @@ const ShowreelPage = () => {
             <div className="grid gap-8 md:grid-cols-2">
               {videos.map((video) => (
                 <div key={video.videoUrl}>
-                  <iframe
-                    className="w-full aspect-video rounded-xl"
-                    src={video.videoUrl}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
+                  <LiteYoutube url={video.videoUrl} title={video.title} className="aspect-video rounded-xl" />
                   <p className="font-light mt-2">{video.title}</p>
                 </div>
               ))}
