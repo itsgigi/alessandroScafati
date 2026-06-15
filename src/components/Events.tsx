@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import GlobalApi from '../utils/GlobalApi';
 import type { Event } from '../utils/types';
 import { FaChevronDown } from 'react-icons/fa';
+import { optimizeImage } from '../utils/imageUrl';
 
 const Events = () => {
     const [events, setEvents] = useState<Event[]>([]);
@@ -32,7 +33,7 @@ const Events = () => {
                 <AnimatedList
                     items={sortedEvents.map(event => ({
                         id: event.id,
-                        image: event.image[0]?.url ?? '',
+                        image: event.image[0]?.url ? optimizeImage(event.image[0].url, 400) : '',
                         title: event.title,
                         description: event.description,
                         date: event.dates[0] ? new Date(event.dates[0]).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : ''

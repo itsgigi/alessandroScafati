@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import GlobalApi from "../utils/GlobalApi";
 import { type Media } from "../utils/types";
 import SEO from "../components/SEO";
+import { optimizeImage } from "../utils/imageUrl";
 
 const BookPage = () => {
     const [items, setItems] = useState<Media[]>([]);
@@ -35,8 +36,8 @@ const BookPage = () => {
         <Masonry
           items={items.map((item) => ({
             id: item.id,
-            url: item.url,
-            img: item.url,
+            url: optimizeImage(item.url, 1600),
+            img: optimizeImage(item.url, 600),
             height: formatHeight(item.height),
           }))}
           ease="power3.out"

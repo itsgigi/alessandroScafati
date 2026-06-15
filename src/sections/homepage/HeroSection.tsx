@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BlurText from "../../components/constants/ui/BlurText";
 import type { Media } from "../../utils/types";
 import GlobalApi from "../../utils/GlobalApi";
+import { optimizeImage } from "../../utils/imageUrl";
 
 const HeroSection = () => {
   const screenWidth = window.innerWidth;
@@ -39,7 +40,7 @@ const HeroSection = () => {
               key={src.url}
               className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? 'opacity-100' : 'opacity-0'}`}
               style={{
-                backgroundImage: `url('${src.url}')`,
+                backgroundImage: `url('${optimizeImage(src.url, 1920)}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
@@ -56,7 +57,7 @@ const HeroSection = () => {
                 filter: blurStrength,
                 transform: blurSize
             }}></div>
-            <img className="relative w-auto h-32 color-gold z-10" src="/firmaAle.svg" alt="" />
+            <img className="relative w-auto h-32 color-gold z-10" src="/firmaAle.svg" alt="" fetchPriority="high" />
             <BlurText
               text="Attore • Performer • Artista"
               delay={150}

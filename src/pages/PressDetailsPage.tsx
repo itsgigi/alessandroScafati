@@ -5,6 +5,7 @@ import GlobalApi from '../utils/GlobalApi';
 import { useEffect, useState } from 'react';
 import type { Article } from '../utils/types';
 import SEO from '../components/SEO';
+import { optimizeImage } from '../utils/imageUrl';
 
 const PressDetailsPage = () => {
   const { articleId } = useParams<{ articleId: string }>();
@@ -107,7 +108,7 @@ const PressDetailsPage = () => {
               {/* Immagine corrente */}
               <div className="relative w-full rounded-lg overflow-hidden">
                 <img
-                  src={article.image[currentImageIndex].url}
+                  src={optimizeImage(article.image[currentImageIndex].url, 1200)}
                   alt={`${article.title} - Immagine ${currentImageIndex + 1}`}
                   className="w-full h-full object-fill object-top transition-opacity duration-300"
                   loading="lazy"
@@ -199,7 +200,7 @@ const PressDetailsPage = () => {
                   <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                       <img
-                          src={article.image[0]?.url || article.image[currentImageIndex]?.url}
+                          src={optimizeImage(article.image[0]?.url || article.image[currentImageIndex]?.url, 100)}
                           alt={article.title}
                           className="w-12 h-12 rounded-full object-cover"
                           loading="lazy"

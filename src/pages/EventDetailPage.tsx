@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import GlobalApi from "../utils/GlobalApi";
 import type { Event } from "../utils/types";
 import SEO from "../components/SEO";
+import { optimizeImage } from "../utils/imageUrl";
 
 const EventDetailPage = () => {
     const { eventId } = useParams();
@@ -63,7 +64,7 @@ const EventDetailPage = () => {
                             {/* Immagine corrente */}
                             <div className="relative w-full overflow-hidden rounded-lg shadow-lg">
                                 <img
-                                    src={event.image[currentImageIndex].url}
+                                    src={optimizeImage(event.image[currentImageIndex].url, 1200)}
                                     alt={`${event.title} - Immagine ${currentImageIndex + 1}`}
                                     className="max-w-full h-auto w-full object-cover transition-opacity duration-300"
                                     loading="lazy"

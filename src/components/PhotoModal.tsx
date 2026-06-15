@@ -147,7 +147,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
         {/* Immagine */}
         <img
           ref={imageRef}
-          src={currentPhoto.img}
+          src={currentPhoto.url}
           alt={`Foto ${currentIndex + 1}`}
           className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
           style={{ maxHeight: '90vh' }}

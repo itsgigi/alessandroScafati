@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import GlobalApi from '../utils/GlobalApi';
 import type { Article } from '../utils/types';
 import SEO from '../components/SEO';
+import { optimizeImage } from '../utils/imageUrl';
 
 const PressPage = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const PressPage = () => {
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <img
-                  src={article.image[0]?.url ?? ''}
+                  src={article.image[0]?.url ? optimizeImage(article.image[0].url, 600) : ''}
                   alt={article.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
