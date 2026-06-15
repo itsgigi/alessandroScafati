@@ -2,7 +2,6 @@
 // (so CMS-fetched content is included) and writes the result as static HTML
 // into dist/, so crawlers that don't execute JS still see real content.
 import { preview } from 'vite'
-import puppeteer from 'puppeteer'
 import { request, gql } from 'graphql-request'
 import { config as loadEnv } from 'dotenv'
 import { mkdir, writeFile } from 'node:fs/promises'
@@ -61,6 +60,24 @@ function routeToFilePath(route) {
   return `${route.replace(/^\//, '')}.html`
 }
 
+// Vercel's build image lacks the shared libs (libnspr4 etc.) puppeteer's
+// bundled Chrome needs, so use @sparticuz/chromium's prebuilt binary there.
+// Locally, plain puppeteer's bundled Chrome works fine.
+async function launchBrowser() {
+  if (process.env.VERCEL) {
+    const chromium = (await import('@sparticuz/chromium')).default
+    const puppeteer = (await import('puppeteer-core')).default
+    return puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
+    })
+  }
+
+  const puppeteer = (await import('puppeteer')).default
+  return puppeteer.launch({ headless: true })
+}
+
 async function main() {
   const routes = [...STATIC_ROUTES, ...(await getDynamicRoutes())]
   console.log(`[prerender] rendering ${routes.length} routes:`, routes)
@@ -68,7 +85,7 @@ async function main() {
   const server = await preview({ preview: { port: 4173, host: '127.0.0.1' } })
   const baseUrl = `http://127.0.0.1:${server.config.preview.port}`
 
-  const browser = await puppeteer.launch({ headless: true })
+  const browser = await launchBrowser()
 
   // Render everything into memory first: the dist/ output is also served by
   // the preview server's SPA fallback for routes not yet rendered, so writing
