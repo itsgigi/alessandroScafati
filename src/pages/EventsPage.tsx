@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Calendar from '../components/Calendar';
 import EventList from '../components/EventList';
+import SEO from '../components/SEO';
 
 const EventsPage = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -11,6 +12,11 @@ const EventsPage = () => {
 
     return (
         <>
+            <SEO
+              title="Eventi — Alessandro Scafati, attore"
+              description="Calendario eventi, spettacoli teatrali e appuntamenti pubblici di Alessandro Scafati."
+              path="/eventi"
+            />
             <div className="min-h-screen pt-20 lg:px-8 bg-black text-white">
                 <div className="container mx-auto px-4 py-8">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

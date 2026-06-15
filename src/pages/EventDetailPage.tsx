@@ -6,6 +6,7 @@ import Paragraph from "../components/constants/ui/Paragraph";
 import { useEffect, useState } from "react";
 import GlobalApi from "../utils/GlobalApi";
 import type { Event } from "../utils/types";
+import SEO from "../components/SEO";
 
 const EventDetailPage = () => {
     const { eventId } = useParams();
@@ -46,6 +47,13 @@ const EventDetailPage = () => {
     
     return (
         <div className="min-h-screen bg-black">
+            <SEO
+                title={`${event.title} — Eventi di Alessandro Scafati`}
+                description={event.description?.slice(0, 160) || `${event.title}: evento con Alessandro Scafati, attore.`}
+                path={`/eventi/${eventId}`}
+                image={event.image?.[0]?.url}
+                type="article"
+            />
             {/* Event Information Section */}
             <div className="max-w-4xl mx-auto px-6 py-12 pt-30 font-lato">
                 {/* Event Image Carousel */}
@@ -54,10 +62,12 @@ const EventDetailPage = () => {
                         <div className="relative flex justify-center items-center">
                             {/* Immagine corrente */}
                             <div className="relative w-full overflow-hidden rounded-lg shadow-lg">
-                                <img 
-                                    src={event.image[currentImageIndex].url} 
+                                <img
+                                    src={event.image[currentImageIndex].url}
                                     alt={`${event.title} - Immagine ${currentImageIndex + 1}`}
                                     className="max-w-full h-auto w-full object-cover transition-opacity duration-300"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                                 
                                 {/* Frecce di navigazione */}
@@ -125,7 +135,7 @@ const EventDetailPage = () => {
                     
                     {/* Additional Info Section */}
                     <div className="bg-primary border border-gold/30 rounded-2xl p-6 mt-12 w-full flex flex-col justify-center items-center">
-                        <Heading title="Informazioni Evento" />
+                        <Heading title="Informazioni Evento" as="h2" />
                         <div className="flex flex-wrap gap-8 md:gap-12 justify-center w-full">
                             {event.dates && <div className="max-w-xs break-words">
                                 <h3 className="text-lg font-semibold text-gold-light mb-2">Data</h3>

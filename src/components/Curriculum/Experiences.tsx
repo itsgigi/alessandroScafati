@@ -29,7 +29,7 @@ const Experiences = () => {
 
     return (
         <section className="max-w-5xl mx-auto px-6 py-8 flex flex-col gap-4 items-center">
-            <Heading title="Le mie esperienze" />
+            <Heading title="Le mie esperienze" as="h2" />
             <p className="text-md font-lato font-light opacity-80 mb-4">
                 {curriculum?.experience}
             </p>

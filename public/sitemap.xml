@@ -8,6 +8,22 @@
     <priority>1.0</priority>
   </url>
   
+  <!-- Casting -->
+  <url>
+    <loc>https://alessandroscafati.it/casting</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Showreel -->
+  <url>
+    <loc>https://alessandroscafati.it/showreel</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Curriculum -->
   <url>
     <loc>https://alessandroscafati.it/curriculum</loc>

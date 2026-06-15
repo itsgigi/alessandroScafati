@@ -4,6 +4,7 @@ import Divider from '../components/constants/ui/Divider';
 import { useState, useEffect } from 'react';
 import GlobalApi from '../utils/GlobalApi';
 import type { Article } from '../utils/types';
+import SEO from '../components/SEO';
 
 const PressPage = () => {
   const navigate = useNavigate();
@@ -27,6 +28,11 @@ const PressPage = () => {
 
   return (
     <div className="min-h-screen text-gold font-lato">
+      <SEO
+        title="Press — Rassegna stampa di Alessandro Scafati, attore"
+        description="Rassegna stampa e articoli su Alessandro Scafati, attore di cinema, televisione e teatro."
+        path="/press"
+      />
       <div className="max-w-6xl mx-auto px-6 xl:px-0 pt-25 md:pt-30">
         <Heading title="Press" />
 
@@ -44,6 +50,8 @@ const PressPage = () => {
                   src={article.image[0]?.url ?? ''}
                   alt={article.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               

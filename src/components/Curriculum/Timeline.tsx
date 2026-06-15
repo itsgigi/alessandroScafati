@@ -40,7 +40,7 @@ const Timeline = ({ title, entries }: TimelineProps) => {
 
   return (
     <div className="w-full text-center">
-      <Heading title={title} />
+      <Heading title={title} as="h2" />
       <div className="relative border-l border-white/30">
         {sortedGroups.length === 0 ? (
           <div className="text-center py-8">

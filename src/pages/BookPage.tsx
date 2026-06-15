@@ -4,6 +4,7 @@ import Masonry from "../components/Masonry";
 import { useState, useEffect } from "react";
 import GlobalApi from "../utils/GlobalApi";
 import { type Media } from "../utils/types";
+import SEO from "../components/SEO";
 
 const BookPage = () => {
     const [items, setItems] = useState<Media[]>([]);
@@ -24,6 +25,11 @@ const BookPage = () => {
 
     return (
       <div className="min-h-screen bg-black p-4 md:p-20 pt-25 md:pt-30">
+        <SEO
+          title="Book fotografico — Alessandro Scafati, attore"
+          description="Book fotografico di Alessandro Scafati: portfolio immagini per casting di cinema, televisione e teatro."
+          path="/book"
+        />
         <Heading title="Book" />
         <Divider className="mb-4" />
         <Masonry

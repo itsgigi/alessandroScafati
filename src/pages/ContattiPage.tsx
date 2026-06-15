@@ -1,6 +1,7 @@
 import { Mail, Phone } from 'lucide-react';
 import Heading from '../components/constants/ui/Heading';
 import Divider from '../components/constants/ui/Divider';
+import SEO from '../components/SEO';
 
 const ContattiPage = () => {
   const email = "alexscafati93@gmail.com";
@@ -35,6 +36,11 @@ const ContattiPage = () => {
 
   return (
     <div className="min-h-[85vh] pt-10 md:pt-15">
+      <SEO
+        title="Contatti — Alessandro Scafati, attore"
+        description="Contatti di Alessandro Scafati per proposte di casting, produzioni cinema, TV e teatro: email, telefono e agenzia di riferimento."
+        path="/contatti"
+      />
       <div className="max-w-4xl mx-auto px-6 py-16 text-gold-light">
         <Heading title="Contatti" />
         <Divider className="mb-4" />
@@ -85,10 +91,12 @@ const ContattiPage = () => {
             className="flex flex-col items-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 group"
           >
             <div className="p-4 bg-white w-24 h-24 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-500/30 transition-colors duration-300 overflow-hidden">
-              <img 
-                src="/agenzia2.jpeg" 
+              <img
+                src="/agenzia2.jpeg"
                 alt={agency2Name}
                 className="w-full h-full object-fill"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <h3 className="text-xl font-semibold mb-2 font-lato">{agency2Name}</h3>

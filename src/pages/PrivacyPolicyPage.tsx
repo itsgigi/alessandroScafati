@@ -1,9 +1,15 @@
 import Heading from '../components/constants/ui/Heading';
 import Divider from '../components/constants/ui/Divider';
+import SEO from '../components/SEO';
 
 const PrivacyPolicyPage = () => {
   return (
     <div className="min-h-[85vh] pt-10 md:pt-15">
+      <SEO
+        title="Privacy Policy — Alessandro Scafati"
+        description="Informativa sulla privacy del sito di Alessandro Scafati."
+        path="/privacy"
+      />
       <div className="max-w-4xl mx-auto px-6 py-16 text-gold-light">
         <Heading title="Privacy Policy" />
         <Divider className="mb-8" />

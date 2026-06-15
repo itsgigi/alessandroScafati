@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge'
 type Headingrops = {
   title: string;
   className?: string;
+  as?: 'h1' | 'h2' | 'h3';
 }
 
 const HeadingVariants = {
@@ -15,16 +16,24 @@ const HeadingVariants = {
   },
 }
 
-const Heading = ({ title, className }: Headingrops) => {
+const headingTags = {
+  h1: motion.h1,
+  h2: motion.h2,
+  h3: motion.h3,
+}
+
+const Heading = ({ title, className, as = 'h1' }: Headingrops) => {
+  const Component = headingTags[as]
+
   return (
-    <motion.h1
+    <Component
       variants={HeadingVariants}
       initial="initial"
       animate="animate"
       className={twMerge('text-4xl font-bold mb-4 font-dancing-script text-[#d1af89]', className)}
     >
         {title}
-    </motion.h1>
+    </Component>
   )
 }
 

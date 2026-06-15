@@ -8,6 +8,8 @@ import PressPage from './pages/PressPage';
 import PressDetailsPage from './pages/PressDetailsPage';
 import ContattiPage from './pages/ContattiPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import CastingPage from './pages/CastingPage';
+import ShowreelPage from './pages/ShowreelPage';
 import './App.css';
 import Header from './components/navigation/Header';
 import Footer from './components/navigation/Footer';
@@ -18,6 +20,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/casting" element={<CastingPage />} />
+        <Route path="/showreel" element={<ShowreelPage />} />
         <Route path="/eventi" element={<EventsPage />} />
         <Route path="/eventi/:eventId" element={<EventDetailPage />} />
         <Route path="/curriculum" element={<CurriculumPage />} />

@@ -4,6 +4,7 @@ import Block from '../components/constants/Block';
 import GlobalApi from '../utils/GlobalApi';
 import { useEffect, useState } from 'react';
 import type { Article } from '../utils/types';
+import SEO from '../components/SEO';
 
 const PressDetailsPage = () => {
   const { articleId } = useParams<{ articleId: string }>();
@@ -64,6 +65,13 @@ const PressDetailsPage = () => {
 
   return (
     <div className="min-h-screen text-gold font-lato">
+      <SEO
+        title={`${article.title} — Press, Alessandro Scafati`}
+        description={article.subtitle || `${article.title}: articolo di stampa su Alessandro Scafati, attore.`}
+        path={`/press/${articleId}`}
+        image={article.image?.[0]?.url}
+        type="article"
+      />
       <div className="max-w-4xl mx-auto px-6 py-30 xl:px-0">
         {/* Article Header */}
         <header className="mb-12">
@@ -102,6 +110,8 @@ const PressDetailsPage = () => {
                   src={article.image[currentImageIndex].url}
                   alt={`${article.title} - Immagine ${currentImageIndex + 1}`}
                   className="w-full h-full object-fill object-top transition-opacity duration-300"
+                  loading="lazy"
+                  decoding="async"
                 />
                 
                 {/* Frecce di navigazione */}
@@ -192,6 +202,8 @@ const PressDetailsPage = () => {
                           src={article.image[0]?.url || article.image[currentImageIndex]?.url}
                           alt={article.title}
                           className="w-12 h-12 rounded-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                       />
                       <div>
                           <p className="font-medium">{article.author}</p>

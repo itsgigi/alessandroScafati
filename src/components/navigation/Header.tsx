@@ -30,11 +30,15 @@ const Header = () => {
 
                 <button type="button" className="inline-flex p-2 ml-5 text-gold transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100" onClick={handleMenuClick}>
                     <svg className={`w-6 h-6 transition-transform duration-300`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
 
                 <div className="hidden ml-10 lg:flex lg:items-center lg:mr-auto lg:space-x-10">
+                    <a href="/casting" title="" className="text-base font-medium text-gold transition-all font-lato duration-200 hover:text-gold-light focus:text-gold-light"> Casting </a>
+
+                    <a href="/showreel" title="" className="text-base font-medium text-gold transition-all font-lato duration-200 hover:text-gold-light focus:text-gold-light"> Showreel </a>
+
                     <a href="/curriculum" title="" className="text-base font-medium text-gold transition-all font-lato duration-200 hover:text-gold-light focus:text-gold-light"> Curriculum </a>
 
                     <a href="/book" title="" className="text-base font-medium text-gold transition-all duration-200 hover:text-gold-light focus:text-gold-light"> Book </a>
@@ -54,6 +58,14 @@ const Header = () => {
                     ? 'opacity-100 translate-y-0 max-h-96' 
                     : 'opacity-0 -translate-y-2 max-h-0'
             }`}>    
+                <a href="/casting" title="" className={`py-2 text-base font-medium border-b-1 w-[80%] items-center justify-center mx-auto border-gold/30 text-gold transition-all duration-200 focus:text-gold-light transform ${
+                    isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                }`} style={{ transitionDelay: isOpen ? '50ms' : '0ms' }}> Casting </a>
+
+                <a href="/showreel" title="" className={`py-2 text-base font-medium border-b-1 w-[80%] items-center justify-center mx-auto border-gold/30 text-gold transition-all duration-200 focus:text-gold-light transform ${
+                    isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                }`} style={{ transitionDelay: isOpen ? '75ms' : '0ms' }}> Showreel </a>
+
                 <a href="/curriculum" title="" className={`py-2 text-base font-medium border-b-1 w-[80%] items-center justify-center mx-auto border-gold/30 text-gold transition-all duration-200 focus:text-gold-light transform ${
                     isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
                 }`} style={{ transitionDelay: isOpen ? '100ms' : '0ms' }}> Curriculum </a>
