@@ -33,8 +33,9 @@ const IntroSection = () => {
           Alessandro Scafati è un attore italiano nato ad Avezzano (L'Aquila) nel 1993, attivo tra
           cinema, teatro e audiovisivo. Lavora in produzioni contemporanee e cinema d'autore, con una
           recitazione naturale e realistica, adatta a ruoli drammatici, moderni e di genere. Nel 2025
-          ha lavorato in una fiction Rai diretta da Marco Pontecorvo e nello spot internazionale Peroni
-          Nastro Azzurro.
+          ha lavorato in una fiction Rai diretta da Marco Pontecorvo e nel 2026 ha lavorato con Nanni
+          Moretti nel film "Succederà questa notte" e nella fitction Rai "Una finestra vista lago" 
+          diretta da Marco Pontecorvo.
         </p>
 
         <div className="flex gap-4 mb-8 flex-wrap justify-center">

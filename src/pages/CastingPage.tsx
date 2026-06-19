@@ -9,13 +9,13 @@ const schedaCasting: [string, string][] = [
   ['Età scenica (playing age)', '28–38'],
   ['Capelli', 'Castano scuro / moro'],
   ['Occhi', 'Marroni'],
-  ['Altezza', '180 cm'],
+  ['Altezza', '177 cm'],
   ['Fisicità', 'Atletica / Snella'],
   ['Lingue', 'Italiano neutro'],
   ['Dialetti', 'Marsicano, Romano, Abruzzese, Napoletano (base)'],
   ['Tono recitativo', 'Realistico, cinematografico, comico'],
   ['Tipologia ruoli', 'Drammatico, contemporaneo, supporto d’autore'],
-  ['Base operativa', 'Roma / Avezzano / Milano'],
+  ['Base operativa', 'Roma / Avezzano / Milano / Napoli'],
 ];
 
 const faqJsonLd = {
@@ -35,7 +35,7 @@ const faqJsonLd = {
       name: 'In quali produzioni ha lavorato?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Nel 2025 ha lavorato in una fiction Rai diretta da Marco Pontecorvo e nello spot internazionale Peroni Nastro Azzurro. Per l’elenco completo dei credit, vedi la pagina Curriculum.',
+        text: 'Ha lavorato per la produzione Fandango nel film "Succederà questa notte" di Nanni Moretti e per la Cross Production nella fiction "La vita di Lorenzo il milanese" per la Rai.',
       },
     },
     {
