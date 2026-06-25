@@ -10,6 +10,7 @@ import ContattiPage from './pages/ContattiPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import CastingPage from './pages/CastingPage';
 import ShowreelPage from './pages/ShowreelPage';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import Header from './components/navigation/Header';
 import Footer from './components/navigation/Footer';
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
       </Routes>
       <Footer />
+      <Analytics />
     </Router>
   );
 };

@@ -35,6 +35,9 @@ Allow: /
 # Sitemap
 Sitemap: https://alessandroscafati.it/sitemap.xml
 
+# LLM
+LLM-Txt: https://alessandroscafati.it/llm.txt
+
 # Crawl-delay per evitare sovraccarico del server
 Crawl-delay: 1
 
