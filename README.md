@@ -16,10 +16,18 @@ Questo è il portfolio professionale di **Alessandro Scafati**, attore, performe
   - **Showreel**: Video dimostrativo delle capacità artistiche
   - **More Content**: Contenuti aggiuntivi e approfondimenti
 
+### 🎬 **Casting** (`/casting`)
+- Informazioni e materiali per casting e provini
+- Presentazione professionale per registi e produzioni
+
+### 🎥 **Showreel** (`/showreel`)
+- Video reel delle migliori performance
+- Materiale audiovisivo dimostrativo
+
 ### 📅 **Eventi** (`/eventi`)
 - **Calendario interattivo**: Visualizzazione mensile degli eventi
 - **Lista eventi**: Dettagli completi di ogni evento con possibilità di filtraggio per data
-- **Eventi singoli**: Pagine dedicate per ogni evento specifico
+- **Eventi singoli** (`/eventi/:eventId`): Pagine dedicate per ogni evento specifico
 
 ### 📋 **Curriculum** (`/curriculum`)
 - **Esperienze professionali**: Panoramica completa del percorso artistico
@@ -30,28 +38,38 @@ Questo è il portfolio professionale di **Alessandro Scafati**, attore, performe
   - 📢 **Pubblicità**: Campagne pubblicitarie e spot
 
 ### 📸 **Book** (`/book`)
-- **Gallería fotografica**: Layout a masonry con immagini professionali
-- **Portfolio visivo**: Raccolta delle migliori foto scattate per casting e presentazioni
+- **Galleria fotografica**: Layout a masonry con immagini professionali
+- **Portfolio visivo**: Raccolta delle migliori foto per casting e presentazioni
 - **Effetti interattivi**: Hover effects e animazioni fluide
 
 ### 📰 **Press** (`/press`)
 - Articoli e recensioni
 - Interviste e media coverage
 - Riconoscimenti e premi
+- **Dettaglio articolo** (`/press/:articleId`): Pagine dedicate per ogni articolo
 
 ### 📞 **Contatti** (`/contatti`)
 - Informazioni per casting e collaborazioni
 - Contatti diretti e social media
 - Modulo di contatto integrato
 
+### 🔒 **Privacy Policy** (`/privacy`)
+- Informativa sulla privacy e trattamento dati
+
 ## Caratteristiche Tecniche
 
-- **Framework**: React con TypeScript
-- **Styling**: Tailwind CSS con tema personalizzato
+- **Framework**: React 19 con TypeScript
+- **Build System**: Vite 6
+- **Styling**: Tailwind CSS 4 con tema personalizzato
 - **Animazioni**: Framer Motion per transizioni fluide
-- **Routing**: React Router per navigazione SPA
+- **Smooth Scroll**: Lenis per scrolling fluido
+- **Routing**: React Router 7 per navigazione SPA
+- **Data Fetching**: TanStack React Query con GraphQL (graphql-request)
+- **SEO**: React Helmet Async per meta tag dinamici
+- **Pre-rendering**: Script di pre-rendering con Puppeteer per SSG
+- **Analytics**: Vercel Analytics per tracciamento visitatori e page views
 - **Responsive**: Design completamente responsive per tutti i dispositivi
-- **Performance**: Ottimizzato con Vite per build veloci
+- **Icone**: Lucide React e React Icons
 
 ## Palette Colori
 
@@ -80,13 +98,7 @@ npm run dev
 
 # Build per produzione
 npm run build
+
+# Preview build di produzione
+npm run preview
 ```
-
-## Tecnologie Utilizzate
-
-- **React 18** con TypeScript
-- **Vite** per il build system
-- **Tailwind CSS** per lo styling
-- **Framer Motion** per le animazioni
-- **React Router** per la navigazione
-- **Lucide React** per le icone
