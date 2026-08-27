@@ -33,7 +33,7 @@ const IntroSection = () => {
           Alessandro Scafati è un attore italiano nato ad Avezzano (L'Aquila) nel 1993, attivo tra
           cinema, teatro e audiovisivo. Lavora in produzioni contemporanee e cinema d'autore, con una
           recitazione naturale e realistica, adatta a ruoli drammatici, moderni e di genere. Nel 2026 
-          ha lavorato con Nanni Moretti nel film "Succederà questa notte" e nella fitction Rai "Una 
+          ha lavorato con Nanni Moretti nel film "Succederà questa notte" e nella fiction Rai "Una 
           finestra vista lago" diretta da Marco Pontecorvo.
         </p>
 
